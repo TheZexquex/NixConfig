@@ -1,6 +1,6 @@
 { ... }: {
   home.file.".ssh/allowed_signers".text =
-    "* ${builtins.readFile ~/.ssh/id_ed25519.pub}";
+    "* ${builtins.readFile /home/thezexquex/.ssh/id_ed25519_github.pub}";
   programs.git = {
     enable = true;
     userName = "TheZexquex";
