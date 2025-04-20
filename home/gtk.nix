@@ -2,8 +2,8 @@
    gtk = {
     enable = true;
     theme = {
-      name = "catppuccin-mocha-blue-compact+normal";
-      package = pkgs.catppuccin-gtk;
+      name = "atppuccin-Dark-Macchiato";
+      package = pkgs.magnetic-catppuccin-gtk;
     };
 
     gtk4.extraConfig = {

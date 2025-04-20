@@ -6,6 +6,5 @@
     ./hyprpaper.nix
     ./rofi.nix
     ./hyprpanel.nix
-
   ];
 }

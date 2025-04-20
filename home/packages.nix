@@ -19,11 +19,19 @@
     # System tools and customization
     hyprpaper
     hyprpicker
+    hyprlock
     hyprsunset
     btop
+    mangohud
+    mangojuice
+    goverlay
     brightnessctl
     wf-recorder
     walker
+    obs-studio
+    vlc
+    geeqie # Image viewer
+    udiskie # Aoutomounting for removable disks
 
     # Editors and IDEs
     jetbrains.idea-ultimate
@@ -35,17 +43,19 @@
     vimPlugins.markview-nvim
     rnote
     obsidian
-  
+     
     # This and that
     wine
     
     # Gaming and fun
     youtube-music
+    spotify
     discord
+    whatsapp-for-linux
     modrinth-app
     lunar-client
     minetest
-    streamdeck-ui
+    streamcontroller
     
     # Devtools and Languages
     go
@@ -54,6 +64,7 @@
     python3
     python312Packages.pip
     nodejs_20
+    gcc
     jdk23
     docker
     appimage-run
