@@ -7,6 +7,10 @@
     systemd.enable = true;
 
     settings = {
+      env = [
+        "GNOME_KEYRING_CONTROL,$XDG_RUNTIME_DIR/keyring"
+        "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/keyring/ssh"
+      ];
       general = {
         border_size = 4;
         "col.active_border" = "rgb(ed8796) rgb(c6a0f6) 45deg";
@@ -18,8 +22,9 @@
       };
 
       exec-once = [
-        "swww-daemon && swww img ~/Pictures/wallpapers/wallpaper.png"
-        "hyprpanel"
+        "swww-daemon && swww img ~/Pictures/wallpapers/wallpaper-hy.png"
+        "clipse -listen"
+        "hyprctl setcursor Future 20"
       ];
 
       monitor = [
@@ -34,9 +39,13 @@
 
       "$mod" = "SUPER";
       bind = [
+        "$mod, Print, exec, grim -g \"$(slurp -o)\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
+        ",Print, exec, filename=~/Pictures/Screenshots/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png && grim -g \"$(slurp -o)\" -t png \"$filename\" && wl-copy --type image/png < \"$filename\""
+        "$mod, V, exec, alacritty --class clipse -e 'clipse'"
         "$mod, B, exec, firefox"
         "$mod, Q, exec, alacritty"
         "$mod, M, exit"
+        "$mod, L, exec, hyprlock"
 
         "$mod, C, killactive"
         "$mod, F, fullscreen"
@@ -88,6 +97,35 @@
       input = {
         kb_layout = "de";
       };
+
+      # -- Fix odd behaviors in IntelliJ IDEs --
+      windowrule = [
+        #! Fix focus issues when dialogs are opened or closed
+        #"windowdance,class:^(jetbrains-.*)$,floating:1"
+        #! Fix splash screen showing in weird places and prevent annoying focus takeovers
+        ##"center,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
+        ##"nofocus,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
+        ##"noborder,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
+
+        
+        #! Center popups/find windows
+        ##"center,class:^(jetbrains-.*)$,title:^( )$,floating:1"
+        ##"stayfocused,class:^(jetbrains-.*)$,title:^( )$,floating:1"
+        ##"noborder,class:^(jetbrains-.*)$,title:^( )$,floating:1"
+        #! Disable window flicker when autocomplete or tooltips appear
+        #"nofocus,class:^(jetbrains-.*)$,title:^(win.*)$,floating:1"
+
+        "noinitialfocus, class:^(.*jetbrains.*)$, title:^(win.*)$"
+        "nofocus, class:^(.*jetbrains.*)$, title:^(win.*)$
+        # fix tab dragging (always have a single space character as their title)"
+        "noinitialfocus, class:^(.*jetbrains.*)$, title:^\\s$"
+        "nofocus, class:^(.*jetbrains.*)$, title:^\\s$"
+
+        "size 622 652,class:(clipse)"
+        #"size 622 652,class:(satty)"
+        "float,class:(clipse)"
+        #"float,class:(satty)"
+      ];  
     };
   };
 }

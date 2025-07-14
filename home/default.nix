@@ -23,10 +23,13 @@
 
     sessionVariables = {
       EDITOR = "lvim";
+      GNOME_KEYRING_CONTROL = "$XDG_RUNTIME_DIR/keyring";
+      SSH_AUTH_SOCK = "";
     };
 
     stateVersion = "24.11";
   };
+
 
   programs.home-manager.enable = true;
 }

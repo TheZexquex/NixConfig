@@ -6,7 +6,7 @@
     users = {
       thezexquex = {
         imports = [
-          inputs.hyprpanel.homeManagerModules.hyprpanel
+         # inputs.hyprpanel.homeManagerModules.hyprpanel
           inputs.catppuccin.homeModules.catppuccin
           ../../home
         ];

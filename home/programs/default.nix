@@ -5,6 +5,8 @@
     ./alacritty.nix
     ./hyprpaper.nix
     ./rofi.nix
-    ./hyprpanel.nix
+   # ./hyprpanel.nix
+   # ./waybar.nix
+    ./keyring.nix
   ];
 }

@@ -1,5 +1,26 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    halloy
+    eww-wayland
+    eww
+    sonusmix
+    clipgrab
+    onlyoffice-desktopeditors
+    collabora-online
+    certbot
+    mousai
+    davinci-resolve-studio
+    waybar
+    jmc2obj
+    blender
+    pulsemeeter
+    easyeffects
+    yazi
+    ueberzugpp
+    clang-tools
+
+    lutris
+    helvum
     # Terminal
     alacritty
     neofetch
@@ -15,6 +36,14 @@
     nemo-with-extensions
     superfile
     kdePackages.dolphin
+
+    # Screenshots
+    satty
+    grim
+    slurp
+
+    # Audio
+    qpwgraph
 
     # System tools and customization
     hyprpaper
@@ -46,6 +75,9 @@
      
     # This and that
     wine
+    bottles
+
+    ungoogled-chromium 
     
     # Gaming and fun
     youtube-music
@@ -54,6 +86,7 @@
     whatsapp-for-linux
     modrinth-app
     lunar-client
+    labymod-launcher
     minetest
     streamcontroller
     
@@ -69,9 +102,15 @@
     docker
     appimage-run
 
+    # Passwords
+    gnome-keyring
+    libsForQt5.kwalletmanager
+    # pinentry-gnome3
+    seahorse 
     bitwarden-desktop
-    kdePackages.kwalletmanager
-    
+    libsecret
+    # kdePackages.kwalletmanager
+     
     # Themes
     gnome-themes-extra
     gtk-engine-murrine
@@ -80,12 +119,23 @@
     catppuccin-kde
     magnetic-catppuccin-gtk
 
+    #
+    gimp3
+    aseprite
+
     # Asd
     wl-clipboard
+    gnomeExtensions.clipboard-indicator
+    clipse
     dart-sass
     upower
     gvfs
     bluez
+    gzip
+    zip
+    file
     networkmanager
+    jq
+    fzf
   ];   
 }

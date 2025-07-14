@@ -24,7 +24,7 @@
     options = [ "fmask=0077" "dmask=0077" ];
   };
 
-  fileSystems."/mnt/ssd1" = {
+  fileSystems."/data" = {
     device = "UUID=1E6E29426E2913D5";
     fsType = "ntfs"; 
     options = [ "noatime" "x-systemd.automount" "x-systemd.idle-timeout=60" ];

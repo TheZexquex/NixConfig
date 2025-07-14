@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available 
 # in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, lib, ... }:
 
 {
   imports =
@@ -10,7 +10,18 @@
       ./programs
     ];
 
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [ 
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+    ];
+  };
+
+  programs.dconf.enable = true;
+  programs.ssh.startAgent = false;
+
   # Set your time zone.
 
   time.timeZone = "Europe/Berlin";
@@ -44,6 +55,9 @@
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
+  
+  virtualisation.docker.enable = true;
+  virtualisation.waydroid.enable = true;
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -54,6 +68,9 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = false;
   services.desktopManager.plasma6.enable = false;
+
+  services.dbus.enable = true;
+ 
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -82,13 +99,30 @@
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
+  services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
+
+  # PAM-Konfiguration bleibt gleich
+  security.pam.services = {
+    gdm = {
+     enableGnomeKeyring = true;
+    };
+    gdm-password = {
+      enableGnomeKeyring = true;
+    };
+    
+    login = {
+      enableGnomeKeyring = true; 
+    };
+  };
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -113,11 +147,15 @@
   # $ nix search wget
   nix.settings.experimental-features = ["nix-command" "flakes"];
   environment.systemPackages = with pkgs; [
+    libsecret
     git
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     inputs.swww.packages.${pkgs.system}.swww
   ];
+
+  environment.variables.XDG_RUNTIME_DIR = "/run/user/$UID";
+  programs.seahorse.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

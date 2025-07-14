@@ -2,8 +2,12 @@
    gtk = {
     enable = true;
     theme = {
-      name = "atppuccin-Dark-Macchiato";
+      name = "Catppuccin-GTK-Dark";
       package = pkgs.magnetic-catppuccin-gtk;
+    };
+
+    cursorTheme = {
+      name = "Future";
     };
 
     gtk4.extraConfig = {

@@ -18,7 +18,7 @@
 
     # Import a theme from './themes/*.json'.
     # Default: ""
-    theme = "catppuccin_macchiato";
+  
 
     # Override the final config with an arbitrary set.
     # Useful for overriding colors in your selected theme.
@@ -29,16 +29,9 @@
 
     # Configure bar layouts for monitors.
     # See 'https://hyprpanel.com/configuration/panel.html'.
+
     # Default: null
-    layout = {
-      "bar.layouts" = {
-        "*" = {
-          left = [ "dashboard" "workspaces" "windowtitle" ];
-          middle = [ "media" ];
-          right = [ "volume" "network" "bluetooth" "hyprsunset" "systray" "clock" "notifications" ];
-        };
-      };
-    };
+     
 
     # Configure and theme almost all options from the GUI.
     # Options that require '{}' or '[]' are not yet implemented,
@@ -57,15 +50,29 @@
         weather.unit = "metric";
       };
 
-      menus.dashboard.directories.enabled = false;
-      menus.dashboard.stats.enable_gpu = true;
-
-      theme.bar.transparent = false;
-
-      theme.font = {
-        name = "Ubuntu Nerd Font";
-        size = "16px";
+      layout = {
+        "bar.layouts" = {
+          "*" = {
+            left = [ "dashboard" "workspaces" "windowtitle" ];
+            middle = [ "media" ];
+            right = [ "volume" "network" "bluetooth" "hyprsunset" "systray" "clock" "notifications" ];
+          };
+        };
       };
+
+      theme = {
+        name = "catppuccin_macchiato";
+        bar.transparent = false;
+        font = {
+          name = "Ubuntu Nerd Font";
+          size = "16px";
+        };
+      };
+
+      menus.dashboard.directories.enabled = false;
+      menus.dashboard.stats.enable_gpu = true; 
     };
+
+   
   };
 }
