@@ -25,6 +25,7 @@
         "swww-daemon && swww img ~/Pictures/wallpapers/wallpaper-hy.png"
         "clipse -listen"
         "hyprctl setcursor Future 20"
+        "hyprpanel"
       ];
 
       monitor = [
