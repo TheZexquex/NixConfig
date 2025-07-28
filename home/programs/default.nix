@@ -8,5 +8,6 @@
     ./hyprpanel.nix
    # ./waybar.nix
     ./keyring.nix
+    ./obs.nix
   ];
 }

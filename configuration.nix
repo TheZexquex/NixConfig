@@ -84,6 +84,22 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  hardware.graphics = {
+    enable = true;
+
+    extraPackages = with pkgs; [
+      mesa
+      libva
+      libvdpau-va-gl
+      vulkan-loader
+      vulkan-validation-layers
+      amdvlk # Optional: AMD's proprietary Vulkan driver
+      mesa.opencl
+    ];
+  };
+
   hardware.bluetooth = {
     enable = true;
     settings = {

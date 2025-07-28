@@ -12,6 +12,8 @@
           y = 0;
         };
       };
+      font.normal.family = "SpaceMono Nerd Font";
+      font.normal.style = "Bold";
     };
   };
 }

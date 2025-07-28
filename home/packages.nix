@@ -1,7 +1,19 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    yq
+    pulsemeeter
+    hollywood
+    linuxPackages.virtualbox
+    brave
+    virtualbox
+    mcpelauncher-ui-qt
+    bottom
+    kdePackages.kdenlive
+    wayfreeze
+    qmk
+    via
+    myxer
     halloy
-    eww-wayland
     eww
     sonusmix
     clipgrab
@@ -13,7 +25,6 @@
     waybar
     jmc2obj
     blender
-    pulsemeeter
     easyeffects
     yazi
     ueberzugpp
@@ -42,6 +53,10 @@
     grim
     slurp
 
+    # GPU
+    rocmPackages.clr.icd
+    clinfo
+
     # Audio
     qpwgraph
 
@@ -57,7 +72,6 @@
     brightnessctl
     wf-recorder
     walker
-    obs-studio
     vlc
     geeqie # Image viewer
     udiskie # Aoutomounting for removable disks
@@ -88,14 +102,14 @@
     lunar-client
     labymod-launcher
     minetest
-    streamcontroller
+    # $streamcontroller ## broken 
     
     # Devtools and Languages
     go
     git
     bun
-    python3
-    python312Packages.pip
+    # python3
+    # python312Packages.pip
     nodejs_20
     gcc
     jdk23

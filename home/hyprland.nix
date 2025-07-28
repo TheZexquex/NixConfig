@@ -12,13 +12,15 @@
         "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/keyring/ssh"
       ];
       general = {
-        border_size = 4;
+        border_size = 3;
+        gaps_in = 4;
+        gaps_out = 10;
         "col.active_border" = "rgb(ed8796) rgb(c6a0f6) 45deg";
         "col.inactive_border" = "rgb(91d7e3) rgb(b7bdf8) 45deg";
       };
 
       decoration = {
-        rounding = 8;
+        rounding = 4;
       };
 
       exec-once = [
@@ -29,8 +31,8 @@
       ];
 
       monitor = [
-        "DP-5, 2560x1440, 0x0, 1"
-        "DP-4, 2560x1440, 2560x0, 1"
+        "DP-3, 2560x1440, 0x0, 1"
+        "DP-2, 2560x1440, 2560x0, 1"
       ];
 
       animation = [
@@ -40,7 +42,7 @@
 
       "$mod" = "SUPER";
       bind = [
-        "$mod, Print, exec, grim -g \"$(slurp -o)\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
+        "$mod, Print, exec, wayfreeze --after-freeze-cmd 'grim -g \"$(slurp -o)\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png'"
         ",Print, exec, filename=~/Pictures/Screenshots/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png && grim -g \"$(slurp -o)\" -t png \"$filename\" && wl-copy --type image/png < \"$filename\""
         "$mod, V, exec, alacritty --class clipse -e 'clipse'"
         "$mod, B, exec, firefox"
@@ -101,6 +103,7 @@
 
       # -- Fix odd behaviors in IntelliJ IDEs --
       windowrule = [
+        # "opacity 0.9,class:negative:^(firefox|Minecraft.*)$"
         #! Fix focus issues when dialogs are opened or closed
         #"windowdance,class:^(jetbrains-.*)$,floating:1"
         #! Fix splash screen showing in weird places and prevent annoying focus takeovers

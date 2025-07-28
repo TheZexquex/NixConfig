@@ -34,9 +34,7 @@
     in {
     nixosConfigurations.homenix = nixpkgs.lib.nixosSystem { 
       inherit system;
-      specialArgs = { 
-        inherit inputs; 
-      };
+      specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
         ./hosts/homenix

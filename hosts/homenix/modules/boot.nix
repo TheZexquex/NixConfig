@@ -1,4 +1,6 @@
 { ... }: {
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  
   boot.loader = {
     systemd-boot.enable = false;
     efi.canTouchEfiVariables = true;
