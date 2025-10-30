@@ -6,12 +6,12 @@
   programs.rofi = {
     enable = true;
     cycle = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
     plugins = with pkgs; [
       # HACK: temporary fix until ABI update
-      rofi-emoji-wayland
+      rofi-emoji
       (rofi-calc.override {
-        rofi-unwrapped = rofi-wayland-unwrapped;
+        rofi-unwrapped = rofi-unwrapped;
       })
     ];
     extraConfig = {
@@ -21,8 +21,8 @@
       show-icons = true;
       kb-remove-char-back = "BackSpace";
       kb-accept-entry = "Control+m,Return,KP_Enter";
-      kb-mode-next = "Control+h";
-      kb-mode-previous = "Control+l";
+      kb-mode-next = "Alt+Right";
+      kb-mode-previous = "Alt+Left";
       kb-row-up = "Control+k,Up";
       kb-row-down = "Control+j,Down";
       kb-row-left = "Control+u";

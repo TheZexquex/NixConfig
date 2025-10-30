@@ -28,11 +28,13 @@
         "clipse -listen"
         "hyprctl setcursor Future 20"
         "hyprpanel"
+        "udiskie &"
       ];
 
       monitor = [
         "DP-3, 2560x1440, 0x0, 1"
         "DP-2, 2560x1440, 2560x0, 1"
+        "HEADLESS-3, 1920x1080, 0x0, 1"
       ];
 
       animation = [
@@ -90,6 +92,8 @@
 
         "SUPER CTRL, left, movewindow, mon:l"
         "SUPER CTRL, right, movewindow, mon:r"
+
+        "SUPER, R, pass, class:^(com\.obsproject\.Studio)$"
       ];
 
       bindm = [

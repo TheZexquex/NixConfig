@@ -4,7 +4,7 @@
   programs.git = {
     enable = true;
     userName = "TheZexquex";
-    userEmail = "jakobreiser@gmx.de";
+    userEmail = "contact@thezexquex.dev";
 
     signing = {
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIKnUPf31V72xBN4Qv51t8UjXqWd3we7h7XybvFkVVw3 jakobreiser@gmx.de";
@@ -18,6 +18,7 @@
       gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
       user.signingkey = "~/.ssh/id_ed25519.pub";
+      core.autocrlf = "input";
     };
   };
 }

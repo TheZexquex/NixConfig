@@ -1,6 +1,18 @@
-{ pkgs, config, ... }: {
-  programs.waybar.enable = true;
-  programs.waybar.settings.main = {
+{
+  config,
+  pkgs,
+  ...
+}: let
+  inherit (config.theme.colorscheme) xcolors;
+in {
+  programs.waybar = {
+    enable = true;
+    systemd = {
+      enable = true;
+      target = "graphical-session.target";
+    };
+    settings = [
+      {
         layer = "top";
         position = "top";
         exclusive = true;
@@ -173,10 +185,10 @@
           };
           calendar = {
             format = {
-              days = "<span color='gray'><b>{}</b></span>";
-              months = "<span color='white'><b>{}</b></span>";
-              today = "<span color='white'><b><u>{}</u></b></span>";
-              weekdays = "<span color='white'><b>{}</b></span>";
+              days = "<span color='${xcolors.gray1}'><b>{}</b></span>";
+              months = "<span color='${xcolors.white}'><b>{}</b></span>";
+              today = "<span color='${xcolors.white}'><b><u>{}</u></b></span>";
+              weekdays = "<span color='${xcolors.blue}'><b>{}</b></span>";
             };
             mode = "month";
             on-scroll = 1;
@@ -225,10 +237,11 @@
           on-click = "${pkgs.systemd}/bin/systemctl reboot";
           tooltip = false;
         };
-      };
-programs.waybar.style = ''
-      @import url("/home/${config.home.username}/.cache/wal/colors-waybar.css");
+      }
+    ];
 
+    style = ''
+      /* Global */
       * {
         all: unset;
         font-family: "GeistMono Nerd Font Propo", sans-serif;
@@ -236,13 +249,14 @@ programs.waybar.style = ''
         font-weight: 500;
       }
 
+      /* Menu */
       menu {
-        background: black;
+        background: ${xcolors.black0};
         border-radius: 12px;
       }
 
       menu separator {
-        background: black;
+        background: ${xcolors.black3};
       }
 
       menu menuitem {
@@ -252,7 +266,7 @@ programs.waybar.style = ''
       }
 
       menu menuitem:hover {
-        background: lighter(black);
+        background: lighter(${xcolors.black3});
       }
 
       menu menuitem:first-child {
@@ -269,7 +283,7 @@ programs.waybar.style = ''
 
       /* Tooltip */
       tooltip {
-        background: black;
+        background: ${xcolors.black0};
         border-radius: 12px;
       }
 
@@ -279,7 +293,7 @@ programs.waybar.style = ''
 
       /* Waybar */
       window#waybar {
-        background: black;
+        background: ${xcolors.black0};
       }
 
       .modules-left {
@@ -305,7 +319,7 @@ programs.waybar.style = ''
       #custom-suspend,
       #custom-reboot,
       #custom-power {
-        background: black;
+        background: ${xcolors.black3};
         border-radius: 8px;
         margin: 0.5rem 0.25rem;
         transition: 300ms linear;
@@ -332,8 +346,8 @@ programs.waybar.style = ''
       #custom-suspend,
       #custom-reboot,
       #custom-power {
-        background: black;
-        color: black;
+        background: ${xcolors.blue};
+        color: ${xcolors.black3};
         border-radius: 8px;
         font-size: 13pt;
         padding: 0.25rem;
@@ -349,34 +363,34 @@ programs.waybar.style = ''
       }
 
       #workspaces button label {
-        color: white;
+        color: ${xcolors.white};
       }
 
       #workspaces button.empty label {
-        color: gray;
+        color: ${xcolors.gray0};
       }
 
       #workspaces button.urgent label,
       #workspaces button.active label {
-        color: black;
+        color: ${xcolors.black3};
       }
 
       #workspaces button.urgent {
-        background: red;
+        background: ${xcolors.red};
       }
 
       #workspaces button.active {
-        background: blue;
+        background: ${xcolors.blue};
       }
 
       /* Idle Inhibitor */
       #idle_inhibitor {
-        background: black;
-        color: blue;
+        background: ${xcolors.black3};
+        color: ${xcolors.blue};
       }
 
       #idle_inhibitor.deactivated {
-        color: gray;
+        color: ${xcolors.gray0};
       }
 
       /* Systray */
@@ -386,7 +400,7 @@ programs.waybar.style = ''
 
       #tray > .needs-attention {
         -gtk-icon-effect: highlight;
-        background: red;
+        background: ${xcolors.red};
       }
 
       /* Hover effects */
@@ -394,11 +408,11 @@ programs.waybar.style = ''
       #idle_inhibitor:hover,
       #idle_inhibitor.deactivated:hover,
       #clock:hover {
-        background: lighter(black);
+        background: lighter(${xcolors.black3});
       }
 
       #workspaces button.urgent:hover {
-        background: lighter(red);
+        background: lighter(${xcolors.red});
       }
 
       #workspaces button.active:hover,
@@ -409,7 +423,7 @@ programs.waybar.style = ''
       #custom-suspend:hover,
       #custom-reboot:hover,
       #custom-power:hover {
-        background: lighter(blue);
+        background: lighter(${xcolors.blue});
       }
 
       #workspaces button.urgent:hover label,
@@ -421,23 +435,24 @@ programs.waybar.style = ''
       #custom-suspend:hover label,
       #custom-reboot:hover label,
       #custom-power:hover label {
-        color: lighter(black);
+        color: lighter(${xcolors.black3});
       }
 
       #workspaces button:hover label {
-        color: lighter(white);
+        color: lighter(${xcolors.white});
       }
 
       #workspaces button.empty:hover label {
-        color: lighter(gray);
+        color: lighter(${xcolors.gray0});
       }
 
       #idle_inhibitor:hover {
-        color: lighter(blue);
+        color: lighter(${xcolors.blue});
       }
 
       #idle_inhibitor.deactivated:hover {
-        color: lighter(gray);
+        color: lighter(${xcolors.gray0});
       }
     '';
+  };
 }

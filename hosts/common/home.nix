@@ -2,7 +2,7 @@
   home-manager =  {
     extraSpecialArgs = { inherit inputs; };
     useUserPackages = true;
-    useGlobalPkgs = false;
+    useGlobalPkgs = true;
     users = {
       thezexquex = {
         imports = [

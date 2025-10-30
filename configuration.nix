@@ -14,8 +14,7 @@
     enable = true;
     wlr.enable = true;
     extraPortals = with pkgs; [ 
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
+       xdg-desktop-portal-wlr
     ];
   };
 
@@ -71,6 +70,7 @@
 
   services.dbus.enable = true;
  
+  services.udisks2.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -90,11 +90,12 @@
     enable = true;
 
     extraPackages = with pkgs; [
+      rocmPackages.clr.icd
       mesa
       libva
       libvdpau-va-gl
-      vulkan-loader
-      vulkan-validation-layers
+      #vulkan-loader
+      #vulkan-validation-layers
       amdvlk # Optional: AMD's proprietary Vulkan driver
       mesa.opencl
     ];
@@ -142,7 +143,7 @@
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    wireplumber.enable = true;
   };
   
   fonts.packages = builtins.filter pkgs.lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts); # fonts
@@ -167,10 +168,28 @@
     git
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct
+    catppuccin-qt5ct
     inputs.swww.packages.${pkgs.system}.swww
   ];
 
-  environment.variables.XDG_RUNTIME_DIR = "/run/user/$UID";
+  qt = {
+    enable = true;
+    platformTheme = "qt5ct";
+  };
+
+  environment.variables = {
+    XDG_RUNTIME_DIR = "/run/user/$UID";
+    RUSTICL_ENABLE = "radeonsi";
+    ROC_ENABLE_PRE_VEGA = "1";
+
+    QT_QPA_PLATFORM = "wayland"; 
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+    QT_STYLE_OVERRIDE = "Catppuccin-Mocha-Standard-Blue";
+  };
+
   programs.seahorse.enable = true;
 
   # This value determines the NixOS release from which the default

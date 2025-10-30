@@ -5,6 +5,8 @@
     ./packages.nix
     ./hyprland.nix
     ./gtk.nix
+    ./qt.nix
+    ./wallpaper.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

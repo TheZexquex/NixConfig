@@ -1,64 +1,93 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    gnumake
+    python313
+    pipenv
     yq
-    pulsemeeter
     hollywood
-    linuxPackages.virtualbox
-    brave
-    virtualbox
-    mcpelauncher-ui-qt
+    # linuxPackages.virtualbox
     bottom
-    kdePackages.kdenlive
     wayfreeze
     qmk
     via
     myxer
     halloy
     eww
-    sonusmix
-    clipgrab
-    onlyoffice-desktopeditors
-    collabora-online
     certbot
     mousai
-    davinci-resolve-studio
     waybar
     jmc2obj
     blender
     easyeffects
-    yazi
-    ueberzugpp
     clang-tools
+    postman
+    filezilla
 
-    lutris
-    helvum
     # Terminal
     alacritty
     neofetch
     fastfetch
+
+    # Filemanager
     nnn
+    yazi
+    superfile
+    nautilus
+    krusader
+
     traceroute
 
     gotop
 
+    # Office
+    thunderbird
+    onlyoffice-desktopeditors
+
     # Google Quickshare
     rquickshare
-    nautilus
-    nemo-with-extensions
-    superfile
-    kdePackages.dolphin
+    localsend
+    celeste
+    maven
+    (gradle.overrideAttrs {
+        javaToolchains = with pkgs; [ jdk11 jdk17 jdk21 jdk24 ];
+    })
+    recaf-launcher
 
-    # Screenshots
+    # Screenshots + Recording + Editing 
     satty
     grim
+    flameshot
+    kooha
     slurp
+    kdePackages.kdenlive
+    davinci-resolve-studio
+    gnome-network-displays
+    wayvnc
+    tigervnc
+    deskreen
+
+    # Pelican Panel
+    php
+    nginx
+    mariadb
 
     # GPU
     rocmPackages.clr.icd
     clinfo
 
+    # Remote
+    anydesk
+    weylus
+    parsec-bin
+    scrcpy
+
     # Audio
+    helvum
     qpwgraph
+    pulsemeeter
+    wf-recorder
+    tenacity
+    ocenaudio
 
     # System tools and customization
     hyprpaper
@@ -73,16 +102,27 @@
     wf-recorder
     walker
     vlc
+    rapidraw
+    rawtherapee
+    darktable
     geeqie # Image viewer
     udiskie # Aoutomounting for removable disks
+    yt-dlp
+    video-downloader
+    media-downloader
+    ffmpeg
 
     # Editors and IDEs
-    jetbrains.idea-ultimate
+    stable.jetbrains.idea-ultimate
     jetbrains.webstorm
     jetbrains.clion
+    jetbrains.goland
     jetbrains.datagrip
+    jetbrains.pycharm-community
+    jetbrains.pycharm-professional
     vscode
     lunarvim
+    zed-editor
     vimPlugins.markview-nvim
     rnote
     obsidian
@@ -91,19 +131,26 @@
     wine
     bottles
 
-    ungoogled-chromium 
+    ungoogled-chromium
+
+    # Streaming
+    davinci-resolve-studio
+    chatterino7
     
     # Gaming and fun
     youtube-music
     spotify
     discord
     whatsapp-for-linux
+    signal-desktop
     modrinth-app
     lunar-client
     labymod-launcher
     minetest
-    # $streamcontroller ## broken 
-    
+    # mcpelauncher-ui-qt
+    blockbench
+    lutris
+
     # Devtools and Languages
     go
     git
@@ -111,14 +158,13 @@
     # python3
     # python312Packages.pip
     nodejs_20
-    gcc
-    jdk23
+    gcc 
     docker
     appimage-run
 
     # Passwords
     gnome-keyring
-    libsForQt5.kwalletmanager
+    kdePackages.kwalletmanager
     # pinentry-gnome3
     seahorse 
     bitwarden-desktop
@@ -132,8 +178,14 @@
     catppuccin
     catppuccin-kde
     magnetic-catppuccin-gtk
+    waypaper
+    wpgtk
+    pywal
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
 
-    #
+    # Graphic Programs
     gimp3
     aseprite
 
@@ -147,6 +199,10 @@
     bluez
     gzip
     zip
+    unzip
+    rar
+    # unrar
+    openssl
     file
     networkmanager
     jq

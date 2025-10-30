@@ -6,8 +6,9 @@
     ./hyprpaper.nix
     ./rofi.nix
     ./hyprpanel.nix
-   # ./waybar.nix
+    ./waybar.nix
     ./keyring.nix
     ./obs.nix
+    ./java.nix
   ];
 }

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:Nixos/nixpkgs/nixos-25.05";
     catppuccin.url = "github:catppuccin/nix";
 
     catppuccin-gtk = {
@@ -28,18 +29,32 @@
     };
   };
 
-  outputs = { self, nixpkgs, catppuccin, home-manager, hyprpanel, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, catppuccin, home-manager, hyprpanel, ... }@inputs:
     let
       system = "x86_64-linux";
     in {
     nixosConfigurations.homenix = nixpkgs.lib.nixosSystem { 
       inherit system;
       specialArgs = { inherit inputs; };
-      modules = [
+       modules = [
         ./configuration.nix
         ./hosts/homenix
         catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
+
+        ({ pkgs, ... }: {
+          nixpkgs.overlays = [ 
+          (final: _prev: {
+            stable = import inputs.nixpkgs-stable {
+              system = final.system;
+                config = {
+                  allowUnfree = true;
+                  permittedInsecurePackages = [ ];
+                };
+              };
+            })
+          ];
+        })
       ];
     };
   };

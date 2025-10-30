@@ -26,7 +26,7 @@
 
   fileSystems."/data" = {
     device = "UUID=1E6E29426E2913D5";
-    fsType = "ntfs"; 
+    fsType = "ntfs-3g"; 
     options = [ "noatime" "x-systemd.automount" "x-systemd.idle-timeout=60" ];
   };  
 
