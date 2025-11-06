@@ -1,7 +1,7 @@
 { ... }: {
   programs.alacritty = {
     enable = true;
-    catppuccin.enable = true;
+  #  catppuccin.enable = true;
     settings = {
       window = {
         startup_mode = "Maximized";

@@ -56,14 +56,15 @@
 
   
   virtualisation.docker.enable = true;
-  virtualisation.waydroid.enable = true;
+  # virtualisation.waydroid.enable = true;
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-
+  services.displayManager.gdm.enable = true;
+  services.displayManager.sessionPackages = [ pkgs.hyprland ];
+  
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = false;
   services.desktopManager.plasma6.enable = false;
@@ -96,7 +97,6 @@
       libvdpau-va-gl
       #vulkan-loader
       #vulkan-validation-layers
-      amdvlk # Optional: AMD's proprietary Vulkan driver
       mesa.opencl
     ];
   };
@@ -114,10 +114,8 @@
     };
   };
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
-
-  services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
 
   # PAM-Konfiguration bleibt gleich
   security.pam.services = {
@@ -172,7 +170,7 @@
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
     catppuccin-qt5ct
-    inputs.swww.packages.${pkgs.system}.swww
+    inputs.awww.packages.${pkgs.system}.awww
   ];
 
   qt = {

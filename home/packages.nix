@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   home.packages = with pkgs; [
     gnumake
     python313
@@ -49,7 +49,7 @@
     celeste
     maven
     (gradle.overrideAttrs {
-        javaToolchains = with pkgs; [ jdk11 jdk17 jdk21 jdk24 ];
+        javaToolchains = with pkgs; [ jdk11 jdk17 jdk21 ];
     })
     recaf-launcher
 
@@ -94,6 +94,8 @@
     hyprpicker
     hyprlock
     hyprsunset
+    ashell
+    inputs.vicinae.packages.${pkgs.system}.default
     btop
     mangohud
     mangojuice
@@ -129,6 +131,7 @@
      
     # This and that
     wine
+    winboat
     bottles
 
     ungoogled-chromium
@@ -141,12 +144,12 @@
     youtube-music
     spotify
     discord
-    whatsapp-for-linux
+    wasistlos # WhatsApp 
     signal-desktop
     modrinth-app
     lunar-client
     labymod-launcher
-    minetest
+    luanti
     # mcpelauncher-ui-qt
     blockbench
     lutris
@@ -187,6 +190,7 @@
 
     # Graphic Programs
     gimp3
+    inputs.affinity-nix.packages.x86_64-linux.v3
     aseprite
 
     # Asd

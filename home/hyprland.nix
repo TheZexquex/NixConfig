@@ -12,7 +12,7 @@
         "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/keyring/ssh"
       ];
       general = {
-        border_size = 3;
+        border_size = 0;
         gaps_in = 4;
         gaps_out = 10;
         "col.active_border" = "rgb(ed8796) rgb(c6a0f6) 45deg";
@@ -20,15 +20,17 @@
       };
 
       decoration = {
-        rounding = 4;
+        rounding = 6;
       };
 
       exec-once = [
-        "swww-daemon && swww img ~/Pictures/wallpapers/wallpaper-hy.png"
+        "awww-daemon && awww img ~/Pictures/wallpapers/wallpaper-hy.png"
         "clipse -listen"
         "hyprctl setcursor Future 20"
-        "hyprpanel"
+        # "hyprpanel"
         "udiskie &"
+        "vicinae server"
+        # "ashell"
       ];
 
       monitor = [
@@ -56,7 +58,7 @@
         "$mod, F, fullscreen"
         "$mod, W, togglefloating"
 
-        "$mod, space, exec, rofi -show drun"
+        "$mod, space, exec, vicinae toggle"
 
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"

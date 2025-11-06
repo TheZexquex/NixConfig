@@ -3,15 +3,16 @@
 
   programs.git = {
     enable = true;
-    userName = "TheZexquex";
-    userEmail = "contact@thezexquex.dev";
 
     signing = {
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIKnUPf31V72xBN4Qv51t8UjXqWd3we7h7XybvFkVVw3 jakobreiser@gmx.de";
       signByDefault = true;
     };
 
-    extraConfig = {
+    settings = {
+      user.email = "contact@thezexquex.dev";
+      user.name = "TheZexquex";
+      
       init.defaultBranch = "main";
         # Sign all commits using ssh key
       commit.gpgsign = true;

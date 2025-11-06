@@ -4,11 +4,14 @@
     enable = true;
     settings = {
       preload = [
-        "~/Pictures/wallpapers/wallpaper.jpg"
+        "~/Pictures/wallpapers/wallpaper-hy.png"
       ];
       wallpaper = [
-        "DP-4,~/Pictures/wallpapers/wallpaper.jpg"
-        "DP-5,~/Pictures/wallpapers/wallpaper.jpg"
+        "DP-1,~/Pictures/wallpapers/wallpaper-hy.png"
+        "DP-2,~/Pictures/wallpapers/wallpaper-hy.png"
+        "DP-3,~/Pictures/wallpapers/wallpaper-hy.png"
+        "DP-4,~/Pictures/wallpapers/wallpaper-hy.png"
+        "DP-5,~/Pictures/wallpapers/wallpaper-hy-png"
       ];
     };
   };
