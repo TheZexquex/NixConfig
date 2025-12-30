@@ -12,5 +12,7 @@
     ./keyring.nix
     ./obs.nix
     ./java.nix
+    ./modrinth.nix
+    ./noctalia.nix
   ];
 }

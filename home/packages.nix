@@ -95,6 +95,7 @@
     hyprlock
     hyprsunset
     ashell
+    inputs.noctalia.packages.${system}.default
     inputs.vicinae.packages.${pkgs.system}.default
     btop
     mangohud
@@ -122,6 +123,7 @@
     jetbrains.datagrip
     jetbrains.pycharm-community
     jetbrains.pycharm-professional
+    android-studio
     vscode
     lunarvim
     zed-editor
@@ -146,7 +148,16 @@
     discord
     wasistlos # WhatsApp 
     signal-desktop
-    modrinth-app
+
+    gdlauncher-carbon
+    # modrinth-app
+    # Fix for ui scaling and layout problem under wayland 
+    (pkgs.writeShellScriptBin "ModrinthApp" ''
+      #!${pkgs.bash}/bin/bash
+      export GDK_BACKEND=x11
+      exec ${pkgs.modrinth-app}/bin/ModrinthApp "$@"
+    '')
+
     lunar-client
     labymod-launcher
     luanti
