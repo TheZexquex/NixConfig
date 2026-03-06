@@ -1,7 +1,7 @@
 { ... }: {
   networking = {
     networkmanager.enable = true;
-    wireless.enable = false;
+    wireless.enable = true;
     hostName = "homenix";
   };
 }

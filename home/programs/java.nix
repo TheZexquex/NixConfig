@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   programs.java = {
     enable = true;
-    package = pkgs.jdk21;
+    package = pkgs.javaPackages.compiler.temurin-bin.jdk-25;
   };
 
   programs.gradle = {

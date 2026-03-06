@@ -1,6 +1,6 @@
 { inputs, ... }: {
   programs.hyprpanel = {
-    enable = true; 
+    enable = false; 
     systemd.enable = true;
 
     # Configure and theme almost all options from the GUI.

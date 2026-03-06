@@ -1,22 +1,17 @@
-# Edit this configuration file to define what should be installed on your system.  Help is available 
+# Edit this configuration file to define what should be installed on your system.  Help is available
 # in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, inputs, pkgs, lib, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./programs
-    ];
-
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [ 
-       xdg-desktop-portal-wlr
-    ];
-  };
+  config,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./programs
+  ];
 
   programs.dconf.enable = true;
   programs.ssh.startAgent = false;
@@ -46,15 +41,14 @@
   };
 
   programs.hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      # set the flake package
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      # make sure to also set the portal package, so that they are in sync
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    enable = true;
+    xwayland.enable = true;
+    # set the flake package
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  
   virtualisation.docker.enable = true;
   # virtualisation.waydroid.enable = true;
 
@@ -63,14 +57,14 @@
   services.xserver.enable = true;
 
   services.displayManager.gdm.enable = true;
-  services.displayManager.sessionPackages = [ pkgs.hyprland ];
-  
+  services.displayManager.sessionPackages = [pkgs.hyprland];
+
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = false;
   services.desktopManager.plasma6.enable = false;
 
   services.dbus.enable = true;
- 
+
   services.udisks2.enable = true;
 
   # Configure keymap in X11
@@ -85,7 +79,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
 
   hardware.graphics = {
     enable = true;
@@ -120,14 +114,14 @@
   # PAM-Konfiguration bleibt gleich
   security.pam.services = {
     gdm = {
-     enableGnomeKeyring = true;
+      enableGnomeKeyring = true;
     };
     gdm-password = {
       enableGnomeKeyring = true;
     };
-    
+
     login = {
-      enableGnomeKeyring = true; 
+      enableGnomeKeyring = true;
     };
   };
 
@@ -143,14 +137,12 @@
     # no need to redefine it in your config for now)
     wireplumber.enable = true;
   };
-  
-  fonts.packages = builtins.filter pkgs.lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts); # fonts
 
+  fonts.packages = builtins.filter pkgs.lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts); # fonts
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -166,7 +158,9 @@
     git
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    
+
+    wireguard-tools
+
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
     catppuccin-qt5ct
@@ -183,7 +177,7 @@
     RUSTICL_ENABLE = "radeonsi";
     ROC_ENABLE_PRE_VEGA = "1";
 
-    QT_QPA_PLATFORM = "wayland"; 
+    QT_QPA_PLATFORM = "wayland";
     QT_QPA_PLATFORMTHEME = "qt5ct";
     QT_STYLE_OVERRIDE = "Catppuccin-Mocha-Standard-Blue";
   };
@@ -197,5 +191,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, ... }: {
   
   wayland.windowManager.hyprland = {
     enable = true;
@@ -24,13 +24,13 @@
       };
 
       exec-once = [
-        "awww-daemon && awww img ~/Pictures/wallpapers/wallpaper-hy.png"
-        "clipse -listen"
         "hyprctl setcursor Future 20"
-        # "hyprpanel"
         "udiskie &"
         "vicinae server"
-        # "ashell"
+        "noctalia-shell"
+
+        # Autostart special workspaces
+        "[workspace special:music silent] pear-music"
       ];
 
       monitor = [
@@ -42,17 +42,18 @@
       animation = [
         "windows, 1, 3, default, popin"
         "workspaces, 1, 3, default"
+        "specialWorkspace, 1, 8, default, slide bottom"
       ];
 
       "$mod" = "SUPER";
       bind = [
         "$mod, Print, exec, wayfreeze --after-freeze-cmd 'grim -g \"$(slurp -o)\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png'"
         ",Print, exec, filename=~/Pictures/Screenshots/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png && grim -g \"$(slurp -o)\" -t png \"$filename\" && wl-copy --type image/png < \"$filename\""
-        "$mod, V, exec, alacritty --class clipse -e 'clipse'"
+        "$mod, V, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
         "$mod, B, exec, firefox"
         "$mod, Q, exec, alacritty"
-        "$mod, M, exit"
-        "$mod, L, exec, hyprlock"
+        "$mod ALT, END, exit"
+        "$mod, L, exec, noctalia-shell ipc call sessionMenu lockAndSuspend"
 
         "$mod, C, killactive"
         "$mod, F, fullscreen"
@@ -70,6 +71,8 @@
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
         "$mod, 0, workspace, 10"
+
+        "$mod, m, togglespecialworkspace, music"
 
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
@@ -109,6 +112,7 @@
 
       # -- Fix odd behaviors in IntelliJ IDEs --
       windowrule = [
+        "match:class ^(com.github.th_ch.youtube_music)$, workspace special:music"
         # "opacity 0.9,class:negative:^(firefox|Minecraft.*)$"
         #! Fix focus issues when dialogs are opened or closed
         #"windowdance,class:^(jetbrains-.*)$,floating:1"
@@ -125,16 +129,18 @@
         #! Disable window flicker when autocomplete or tooltips appear
         #"nofocus,class:^(jetbrains-.*)$,title:^(win.*)$,floating:1"
 
-        "noinitialfocus, class:^(.*jetbrains.*)$, title:^(win.*)$"
-        "nofocus, class:^(.*jetbrains.*)$, title:^(win.*)$
+        #"noinitialfocus, class:^(.*jetbrains.*)$, title:^(win.*)$"
+        #"nofocus, class:^(.*jetbrains.*)$, title:^(win.*)$
         # fix tab dragging (always have a single space character as their title)"
-        "noinitialfocus, class:^(.*jetbrains.*)$, title:^\\s$"
-        "nofocus, class:^(.*jetbrains.*)$, title:^\\s$"
+        #"noinitialfocus, class:^(.*jetbrains.*)$, title:^\\s$"
+        #"nofocus, class:^(.*jetbrains.*)$, title:^\\s$"
 
-        "size 622 652,class:(clipse)"
+        #"size 622 652,class:(clipse)"
         #"size 622 652,class:(satty)"
-        "float,class:(clipse)"
+        #"float,class:(clipse)"
         #"float,class:(satty)"
+
+        "match:class ^(.*pulsemeeter.*)$, float on, center on"
       ];  
     };
   };

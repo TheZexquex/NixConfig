@@ -1,8 +1,14 @@
 { ... }: {
   programs.alacritty = {
     enable = true;
-  #  catppuccin.enable = true;
+#  catppuccin.enable = true;
     settings = {
+      general = {
+        import = [
+          "themes/noctalia.toml"
+        ];
+      };
+
       window = {
         startup_mode = "Maximized";
         decorations = "None";
@@ -16,4 +22,4 @@
       font.normal.style = "Bold";
     };
   };
-}
+         }

@@ -1,4 +1,8 @@
-{ pkgs, inputs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = with pkgs; [
     gnumake
     python313
@@ -36,6 +40,7 @@
     krusader
 
     traceroute
+    mtr
 
     gotop
 
@@ -47,20 +52,21 @@
     rquickshare
     localsend
     celeste
+    nextcloud-client
     maven
     (gradle.overrideAttrs {
-        javaToolchains = with pkgs; [ jdk11 jdk17 jdk21 ];
+      javaToolchains = with pkgs; [jdk11 jdk17 jdk21 javaPackages.compiler.temurin-bin.jdk-25];
     })
     recaf-launcher
 
-    # Screenshots + Recording + Editing 
+    # Screenshots + Recording + Editing
     satty
     grim
     flameshot
     kooha
     slurp
-    kdePackages.kdenlive
-    davinci-resolve-studio
+    # kdePackages.kdenlive
+    # davinci-resolve-studio
     gnome-network-displays
     wayvnc
     tigervnc
@@ -116,51 +122,67 @@
     ffmpeg
 
     # Editors and IDEs
-    stable.jetbrains.idea-ultimate
+    jetbrains.idea
     jetbrains.webstorm
     jetbrains.clion
     jetbrains.goland
     jetbrains.datagrip
-    jetbrains.pycharm-community
-    jetbrains.pycharm-professional
+    jetbrains.pycharm
     android-studio
+    godot
+    unityhub
     vscode
     lunarvim
     zed-editor
-    vimPlugins.markview-nvim
+
+    # Formatters / LSPs
+    alejandra
+    nixd
+    nil
+    lua-language-server
+    stylua
+
+    rust-analyzer
+
+    # vimPlugins.markview-nvim
+    # vimPlugins.astrocore
+    # vimPlugins.astrotheme
+    # vimPlugins.astroui
+    # vimPlugins.astrolsp
+
     rnote
     obsidian
-     
+
     # This and that
     wine
     winboat
     bottles
 
     ungoogled-chromium
+    brave
 
     # Streaming
-    davinci-resolve-studio
     chatterino7
-    
+
     # Gaming and fun
     youtube-music
     spotify
     discord
-    wasistlos # WhatsApp 
+    # teamspeak6-client
+    zapzap # WhatsApp
     signal-desktop
 
     gdlauncher-carbon
-    # modrinth-app
-    # Fix for ui scaling and layout problem under wayland 
-    (pkgs.writeShellScriptBin "ModrinthApp" ''
-      #!${pkgs.bash}/bin/bash
-      export GDK_BACKEND=x11
-      exec ${pkgs.modrinth-app}/bin/ModrinthApp "$@"
-    '')
+    modrinth-app
+    # Fix for ui scaling and layout problem under wayland
+    #(pkgs.writeShellScriptBin "ModrinthApp" ''
+    #  #!${pkgs.bash}/bin/bash
+    #  export GDK_BACKEND=x11
+    #  exec ${pkgs.modrinth-app}/bin/ModrinthApp "$@"
+    #'')
 
     lunar-client
     labymod-launcher
-    luanti
     # mcpelauncher-ui-qt
     blockbench
     lutris
@@ -172,7 +194,7 @@
     # python3
     # python312Packages.pip
     nodejs_20
-    gcc 
+    gcc
     docker
     appimage-run
 
@@ -180,12 +202,17 @@
     gnome-keyring
     kdePackages.kwalletmanager
     # pinentry-gnome3
-    seahorse 
+    seahorse
     bitwarden-desktop
     libsecret
     # kdePackages.kwalletmanager
-     
+
     # Themes
+    glib
+    nwg-look
+    pywalfox-native
+    matugen
+    adw-gtk3
     gnome-themes-extra
     gtk-engine-murrine
     sassc
@@ -202,6 +229,7 @@
     # Graphic Programs
     gimp3
     inputs.affinity-nix.packages.x86_64-linux.v3
+    krita
     aseprite
 
     # Asd
@@ -222,5 +250,5 @@
     networkmanager
     jq
     fzf
-  ];   
+  ];
 }

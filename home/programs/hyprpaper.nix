@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   services.hyprpaper = {
-    enable = true;
+    enable = false;
     settings = {
       preload = [
         "~/Pictures/wallpapers/wallpaper-hy.png"

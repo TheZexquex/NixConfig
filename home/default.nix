@@ -6,7 +6,7 @@
     ./hyprland.nix
     ./gtk.nix
     ./qt.nix
-    ./wallpaper.nix
+#    ./wallpaper.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -32,6 +32,14 @@
     stateVersion = "24.11";
   };
 
+   xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [  
+       xdg-desktop-portal-gtk
+    ];
+
+    config.common.default = "gtk";
+  };
 
   programs.home-manager.enable = true;
 }

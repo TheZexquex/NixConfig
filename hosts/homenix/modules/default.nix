@@ -5,5 +5,6 @@
     ./bluetooth.nix
     ./boot.nix
     ./sunshine.nix
+    ./wireguard.nix
   ];
 }

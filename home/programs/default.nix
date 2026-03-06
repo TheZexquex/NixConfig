@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   imports = [
     ./starship.nix
     ./git.nix
@@ -14,5 +14,7 @@
     ./java.nix
     ./modrinth.nix
     ./noctalia.nix
+    ./lvim
+    ./nvim
   ];
 }
