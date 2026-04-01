@@ -29,7 +29,6 @@
 
     # Terminal
     alacritty
-    neofetch
     fastfetch
 
     # Filemanager
@@ -47,6 +46,7 @@
     # Office
     thunderbird
     onlyoffice-desktopeditors
+    trelby
 
     # Google Quickshare
     rquickshare
@@ -116,6 +116,7 @@
     darktable
     geeqie # Image viewer
     udiskie # Aoutomounting for removable disks
+    baobab
     yt-dlp
     video-downloader
     media-downloader
@@ -186,6 +187,7 @@
     # mcpelauncher-ui-qt
     blockbench
     lutris
+    openrgb-with-all-plugins
 
     # Devtools and Languages
     go
