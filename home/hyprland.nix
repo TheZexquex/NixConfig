@@ -1,5 +1,4 @@
-{ pkgs, ... }: {
-  
+{pkgs, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
@@ -34,8 +33,8 @@
       ];
 
       monitor = [
-        "DP-3, 2560x1440, 0x0, 1"
-        "DP-2, 2560x1440, 2560x0, 1"
+        "DP-3, 2560x1440@144, 0x0, 1"
+        "DP-2, 2560x1440@144, 2560x0, 1"
         "HEADLESS-3, 1920x1080, 0x0, 1"
       ];
 
@@ -121,7 +120,6 @@
         ##"nofocus,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
         ##"noborder,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
 
-        
         #! Center popups/find windows
         ##"center,class:^(jetbrains-.*)$,title:^( )$,floating:1"
         ##"stayfocused,class:^(jetbrains-.*)$,title:^( )$,floating:1"
@@ -141,7 +139,7 @@
         #"float,class:(satty)"
 
         "match:class ^(.*pulsemeeter.*)$, float on, center on"
-      ];  
+      ];
     };
   };
 }
