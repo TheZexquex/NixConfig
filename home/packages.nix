@@ -66,7 +66,7 @@
     kooha
     slurp
     # kdePackages.kdenlive
-    # davinci-resolve-studio
+    davinci-resolve-studio
     gnome-network-displays
     wayvnc
     tigervnc
@@ -88,7 +88,6 @@
     scrcpy
 
     # Audio
-    helvum
     qpwgraph
     pulsemeeter
     wf-recorder
@@ -133,7 +132,6 @@
     godot
     unityhub
     vscode
-    lunarvim
     zed-editor
 
     # Formatters / LSPs
@@ -158,6 +156,7 @@
     wine
     winboat
     bottles
+    ntfs3g
 
     ungoogled-chromium
     brave
@@ -175,6 +174,8 @@
 
     gdlauncher-carbon
     modrinth-app
+    ftb-app
+    prismlauncher
     # Fix for ui scaling and layout problem under wayland
     #(pkgs.writeShellScriptBin "ModrinthApp" ''
     #  #!${pkgs.bash}/bin/bash

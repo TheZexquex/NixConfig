@@ -31,7 +31,7 @@
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/1E6E29426E2913D5";
     fsType = "ntfs3";
-    options = ["uid=1000" "nofail"];
+    options = ["uid=1000" "gid=1000" "rw" "user" "exec" "umask=000" "nofail"];
   };
 
   swapDevices = [
