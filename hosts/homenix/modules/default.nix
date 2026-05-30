@@ -6,6 +6,7 @@
     ./boot.nix
     ./sunshine.nix
     ./gc.nix
+    ./keyring.nix
     #    ./wireguard.nix
   ];
 }

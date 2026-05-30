@@ -3,18 +3,15 @@
     ./starship.nix
     ./git.nix
     ./alacritty.nix
-    ./hyprpaper.nix
     ./rofi.nix
     ./walker.nix
-    ./ashell.nix
-    ./hyprpanel.nix
-    ./waybar.nix
     ./keyring.nix
     ./obs.nix
     ./java.nix
     ./modrinth.nix
     ./noctalia.nix
-    ./lvim
+    ./direnv.nix
     ./nvim
+    #    ./ssh.nix
   ];
 }

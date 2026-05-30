@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-   gtk = {
+{...}: {
+  gtk = {
     enable = true;
 
     cursorTheme = {
@@ -7,7 +7,7 @@
     };
 
     gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme=1;
+      gtk-application-prefer-dark-theme = 1;
     };
   };
 }

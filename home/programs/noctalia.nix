@@ -52,6 +52,9 @@
             {
               id = "ActiveWindow";
             }
+            {
+              id = "NotificationHistory";
+            }
           ];
 
           center = [
@@ -61,6 +64,8 @@
           ];
 
           right = [
+            {id = "Tray";}
+
             {id = "Volume";}
             {id = "SystemMonitor";}
             {id = "WiFi";}

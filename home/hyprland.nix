@@ -1,15 +1,16 @@
 {pkgs, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     package = pkgs.hyprland;
     xwayland.enable = true;
-    systemd.enable = true;
+    systemd.enable = false;
 
     settings = {
       env = [
         "GNOME_KEYRING_CONTROL,$XDG_RUNTIME_DIR/keyring"
-        "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/keyring/ssh"
       ];
+
       general = {
         border_size = 0;
         gaps_in = 4;
@@ -23,6 +24,7 @@
       };
 
       exec-once = [
+        # "dbus-update-activation-environment --systemd SSH_AUTH_SOCK"
         "hyprctl setcursor Future 20"
         "udiskie &"
         "vicinae server"
@@ -52,7 +54,7 @@
         "$mod, B, exec, firefox"
         "$mod, Q, exec, alacritty"
         "$mod ALT, END, exit"
-        "$mod, L, exec, noctalia-shell ipc call sessionMenu lockAndSuspend"
+        "$mod, L, exec, noctalia-shell ipc call sessionMenu lock"
 
         "$mod, C, killactive"
         "$mod, F, fullscreen"

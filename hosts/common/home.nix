@@ -1,13 +1,21 @@
-{ inputs, pkgs, home-manager, ... }: {
-  home-manager =  {
-    extraSpecialArgs = { inherit inputs; };
+{
+  inputs,
+  stable-pkgs,
+  ...
+}: {
+  home-manager = {
+    extraSpecialArgs = {
+      inherit inputs;
+      inherit stable-pkgs;
+    };
     useUserPackages = true;
-    useGlobalPkgs = true;
+    # useGlobalPkgs = true;
     users = {
       thezexquex = {
         imports = [
-         # inputs.hyprpanel.homeManagerModules.hyprpanel
+          # inputs.hyprpanel.homeManagerModules.hyprpanel
           inputs.catppuccin.homeModules.catppuccin
+          inputs.niri.homeModules.niri
           ../../home
         ];
       };

@@ -1,9 +1,25 @@
-{ ... }: {
+{...}: {
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 56969 5900 3131 1701 47984 47989 47990 48010 ];
-  networking.firewall.allowedUDPPorts = [ 56969 5900 3131 1701 ];
+  networking.firewall.allowedTCPPorts = [
+    3000
+    8080
+    6443
+    25565 # Mc k3s tests
+  ];
+  networking.firewall.allowedUDPPorts = [
+    3000
+    8080
+  ];
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 7000;
+      to = 8000;
+    }
+  ];
   networking.firewall.allowedUDPPortRanges = [
-    { from = 47998; to = 48000; }
-    { from = 8000; to = 8010; }
+    {
+      from = 7000;
+      to = 8000;
+    }
   ];
 }

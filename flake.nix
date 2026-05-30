@@ -12,8 +12,6 @@
       url = "github:Fausto-Korpsvart/Catppuccin-GTK-Theme";
       flake = false;
     };
-    
-    awww.url = "git+https://codeberg.org/LGFae/awww";
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
@@ -22,13 +20,16 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
-    hyprpanel.inputs.nixpkgs.follows = "nixpkgs";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     quickshell = {
       url = "github:outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,29 +40,59 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    graphite.url = "github:GraphiteEditor/Graphite";
+
+    pelican.url = "github:Hythera/nix-pelican";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, catppuccin, home-manager, hyprpanel, ... }@inputs:
-    let
-      system = "x86_64-linux";
-    in {
-    nixosConfigurations.homenix = nixpkgs.lib.nixosSystem { 
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-stable,
+    catppuccin,
+    home-manager,
+    niri,
+    affinity-nix,
+    pelican,
+    graphite,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    stable-pkgs = nixpkgs-stable.legacyPackages.${system};
+  in {
+    nixosConfigurations.homenix = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs; };
-       modules = [
+      specialArgs = {
+        inherit inputs;
+        inherit stable-pkgs;
+      };
+      modules = [
+        ./cache.nix
         ./configuration.nix
         ./hosts/homenix
         catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
 
-        ({ pkgs, ... }: {
-          nixpkgs.overlays = [ 
-          (final: _prev: {
-            stable = import inputs.nixpkgs-stable {
-              system = final.system;
+        pelican.nixosModules.default # enable the NixOS moduel
+        {nixpkgs.overlays = [pelican.overlays.default];}
+
+        ({pkgs, ...}: {
+          nixpkgs.overlays = [
+            affinity-nix.overlays.default
+            (final: _prev: {
+              stable = import inputs.nixpkgs-stable {
+                system = final.system;
                 config = {
                   allowUnfree = true;
-                  permittedInsecurePackages = [ ];
+                  permittedInsecurePackages = [];
+                };
+              };
+              unstable = import inputs.nixpkgs {
+                system = final.system;
+                config = {
+                  allowUnfree = true;
+                  permittedInsecurePackages = [];
                 };
               };
             })

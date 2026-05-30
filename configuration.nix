@@ -1,10 +1,8 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available
 # in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  config,
   inputs,
   pkgs,
-  lib,
   ...
 }: {
   imports = [
@@ -14,7 +12,8 @@
   ];
 
   programs.dconf.enable = true;
-  programs.ssh.startAgent = false;
+  programs.nix-ld.enable = true;
+  programs.ssh.startAgent = true;
 
   # Set your time zone.
 
@@ -42,6 +41,7 @@
 
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
     xwayland.enable = true;
     # set the flake package
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -56,7 +56,11 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = false; # broken
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "hyprland";
+  };
   services.displayManager.sessionPackages = [pkgs.hyprland];
 
   # Enable the KDE Plasma Desktop Environment.
@@ -153,19 +157,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  environment.systemPackages = with pkgs; [
-    libsecret
-    git
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-
-    wireguard-tools
-
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qt5ct
-    catppuccin-qt5ct
-    inputs.awww.packages.${pkgs.system}.awww
-  ];
 
   qt = {
     enable = true;

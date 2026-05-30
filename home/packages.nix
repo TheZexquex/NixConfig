@@ -1,31 +1,19 @@
 {
   pkgs,
   inputs,
+  stable-pkgs,
   ...
 }: {
   home.packages = with pkgs; [
     gnumake
-    python313
-    pipenv
     yq
-    hollywood
-    # linuxPackages.virtualbox
-    bottom
     wayfreeze
-    qmk
-    via
-    myxer
-    halloy
-    eww
     certbot
-    mousai
-    waybar
-    jmc2obj
+
     blender
     easyeffects
     clang-tools
     postman
-    filezilla
 
     # Terminal
     alacritty
@@ -37,6 +25,7 @@
     superfile
     nautilus
     krusader
+    filezilla
 
     traceroute
     mtr
@@ -48,15 +37,18 @@
     onlyoffice-desktopeditors
     trelby
 
-    # Google Quickshare
+    # Fileshare
     rquickshare
     localsend
     celeste
     nextcloud-client
+
+    # Java
     maven
     (gradle.overrideAttrs {
       javaToolchains = with pkgs; [jdk11 jdk17 jdk21 javaPackages.compiler.temurin-bin.jdk-25];
     })
+    javaPackages.openjfx25
     recaf-launcher
 
     # Screenshots + Recording + Editing
@@ -65,6 +57,7 @@
     flameshot
     kooha
     slurp
+
     # kdePackages.kdenlive
     davinci-resolve-studio
     gnome-network-displays
@@ -92,17 +85,16 @@
     pulsemeeter
     wf-recorder
     tenacity
-    ocenaudio
+    # ocenaudio
 
     # System tools and customization
-    hyprpaper
-    hyprpicker
-    hyprlock
-    hyprsunset
+    resources
+    bottom
+    btop
+
     ashell
     inputs.noctalia.packages.${system}.default
     inputs.vicinae.packages.${pkgs.system}.default
-    btop
     mangohud
     mangojuice
     goverlay
@@ -114,8 +106,10 @@
     rawtherapee
     darktable
     geeqie # Image viewer
+    oculante
+    gnome-disk-utility
     udiskie # Aoutomounting for removable disks
-    baobab
+    baobab # Disk Usage
     yt-dlp
     video-downloader
     media-downloader
@@ -123,6 +117,7 @@
 
     # Editors and IDEs
     jetbrains.idea
+    jetbrains.rider
     jetbrains.webstorm
     jetbrains.clion
     jetbrains.goland
@@ -155,7 +150,8 @@
     # This and that
     wine
     winboat
-    bottles
+    # stable-pkgs.bottles
+    # stable-pkgs.lutris
     ntfs3g
 
     ungoogled-chromium
@@ -164,14 +160,19 @@
     # Streaming
     chatterino7
 
-    # Gaming and fun
-    youtube-music
-    spotify
+    # Chat
+    halloy
     discord
-    # teamspeak6-client
-    zapzap # WhatsApp
     signal-desktop
+    # teamspeak6-client
 
+    # Gaming and fun
+    pear-desktop # YT Music
+    spotify
+    hollywood
+    mousai
+
+    # Minecraft
     gdlauncher-carbon
     modrinth-app
     ftb-app
@@ -182,33 +183,29 @@
     #  export GDK_BACKEND=x11
     #  exec ${pkgs.modrinth-app}/bin/ModrinthApp "$@"
     #'')
+    jmc2obj
 
     lunar-client
     labymod-launcher
-    # mcpelauncher-ui-qt
     blockbench
-    lutris
-    openrgb-with-all-plugins
+    usbutils
 
     # Devtools and Languages
     go
     git
     bun
-    # python3
+    cargo
+    python3
     # python312Packages.pip
-    nodejs_20
+    dotnetCorePackages.sdk_10_0-bin
+    # dotnet-runtime_10
     gcc
     docker
     appimage-run
 
     # Passwords
-    gnome-keyring
-    kdePackages.kwalletmanager
-    # pinentry-gnome3
-    seahorse
     bitwarden-desktop
     libsecret
-    # kdePackages.kwalletmanager
 
     # Themes
     glib
@@ -231,7 +228,6 @@
 
     # Graphic Programs
     gimp3
-    inputs.affinity-nix.packages.x86_64-linux.v3
     krita
     aseprite
 

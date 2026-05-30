@@ -1,8 +1,8 @@
-{ catppuccin, pkgs, ...}: {
+{pkgs, ...}: {
   users.users.thezexquex = {
-      isNormalUser = true;
-      description = "Jakob Reiser";
-      extraGroups = [ "networkmanager" "wheel" "docker" ];
-      shell = pkgs.zsh;
+    isNormalUser = true;
+    description = "TheZexquex";
+    extraGroups = ["networkmanager" "wheel" "docker"];
+    shell = pkgs.zsh;
   };
 }

@@ -29,9 +29,9 @@
   };
 
   fileSystems."/data" = {
-    device = "/dev/disk/by-uuid/1E6E29426E2913D5";
-    fsType = "ntfs3";
-    options = ["uid=1000" "gid=1000" "rw" "user" "exec" "umask=000" "nofail"];
+    device = "/dev/disk/by-uuid/46121466-daa6-444b-ad1c-b1c6eb41c68e";
+    fsType = "ext4";
+    options = ["rw" "nofail"];
   };
 
   swapDevices = [

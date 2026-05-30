@@ -40,6 +40,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Make Ctrl + Right before the last word jump to the end of the word
+vim.keymap.set({ "n", "i" }, "<C-Right>", function()
+	local col = vim.fn.col(".")
+	local line = vim.fn.getline(".")
+
+	if col <= #line then
+		vim.cmd("normal! e")
+	end
+end, { noremap = true, silent = true })
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 -- Lazy from nix
