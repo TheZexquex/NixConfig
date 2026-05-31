@@ -12,6 +12,7 @@
     ./noctalia.nix
     ./direnv.nix
     ./nvim
+    ./firefox.nix
     #    ./ssh.nix
   ];
 }

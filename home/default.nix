@@ -11,7 +11,7 @@
   nixpkgs.config.allowUnfree = true;
 
   catppuccin = {
-    enable = true;
+    enable = false;
     hyprland.enable = false;
     accent = "peach";
     flavor = "macchiato";
@@ -25,6 +25,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
+      GTK_THEME = "adw-gtk3-dark";
       GNOME_KEYRING_CONTROL = "$XDG_RUNTIME_DIR/keyring";
     };
 

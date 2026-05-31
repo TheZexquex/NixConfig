@@ -8,10 +8,10 @@
     vicinae.url = "github:vicinaehq/vicinae";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
 
-    catppuccin-gtk = {
-      url = "github:Fausto-Korpsvart/Catppuccin-GTK-Theme";
-      flake = false;
-    };
+    #		 catppuccin-gtk = {
+    #      url = "github:Fausto-Korpsvart/Catppuccin-GTK-Theme";
+    #      flake = false;
+    #    };
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";

@@ -108,6 +108,7 @@
     geeqie # Image viewer
     oculante
     gnome-disk-utility
+    popsicle
     udiskie # Aoutomounting for removable disks
     baobab # Disk Usage
     yt-dlp
@@ -217,8 +218,8 @@
     gtk-engine-murrine
     sassc
     catppuccin
-    catppuccin-kde
-    magnetic-catppuccin-gtk
+    # catppuccin-kde
+    # magnetic-catppuccin-gtk
     waypaper
     wpgtk
     pywal

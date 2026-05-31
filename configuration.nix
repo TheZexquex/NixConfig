@@ -148,9 +148,6 @@
   # services.xserver.libinput.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -164,13 +161,14 @@
   };
 
   environment.variables = {
+    GTK_THEME = "adw-gtk3-dark";
     XDG_RUNTIME_DIR = "/run/user/$UID";
     RUSTICL_ENABLE = "radeonsi";
     ROC_ENABLE_PRE_VEGA = "1";
 
     QT_QPA_PLATFORM = "wayland";
-    QT_QPA_PLATFORMTHEME = "qt5ct";
-    QT_STYLE_OVERRIDE = "Catppuccin-Mocha-Standard-Blue";
+    # QT_QPA_PLATFORMTHEME = "qt5ct";
+    # QT_STYLE_OVERRIDE = "Catppuccin-Mocha-Standard-Blue";
   };
 
   programs.seahorse.enable = true;

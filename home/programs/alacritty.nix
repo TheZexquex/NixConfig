@@ -1,7 +1,7 @@
-{ ... }: {
+{...}: {
   programs.alacritty = {
     enable = true;
-#  catppuccin.enable = true;
+    #  catppuccin.enable = true;
     settings = {
       general = {
         import = [
@@ -22,4 +22,4 @@
       font.normal.style = "Bold";
     };
   };
-         }
+}
