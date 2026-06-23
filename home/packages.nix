@@ -54,6 +54,7 @@
     # Screenshots + Recording + Editing
     satty
     grim
+    hyprshot
     flameshot
     kooha
     slurp
@@ -91,10 +92,11 @@
     resources
     bottom
     btop
+    net-tools
+    bat
 
     ashell
     inputs.noctalia.packages.${system}.default
-    inputs.vicinae.packages.${pkgs.system}.default
     mangohud
     mangojuice
     goverlay
@@ -106,6 +108,7 @@
     rawtherapee
     darktable
     geeqie # Image viewer
+    kdePackages.okular
     oculante
     gnome-disk-utility
     popsicle
@@ -248,7 +251,6 @@
     openssl
     file
     networkmanager
-    jq
     fzf
   ];
 }

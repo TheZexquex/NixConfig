@@ -2,20 +2,26 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
+  pkgs,
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/84e53ff1-21cd-4633-8067-6e55e2fc675f";
@@ -25,19 +31,39 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/1A36-5C52";
     fsType = "vfat";
-    options = ["fmask=0077" "dmask=0077"];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
 
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/46121466-daa6-444b-ad1c-b1c6eb41c68e";
     fsType = "ext4";
-    options = ["rw" "nofail"];
+    options = [
+      "rw"
+      "nofail"
+    ];
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/b042a180-5e64-4e3b-800b-edecabfc6275";}
+    { device = "/dev/disk/by-uuid/b042a180-5e64-4e3b-800b-edecabfc6275"; }
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.graphics = {
+    enable = true;
+
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+      mesa
+      libva
+      libvdpau-va-gl
+      mesa.opencl
+    ];
+  };
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
 }

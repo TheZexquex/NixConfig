@@ -11,6 +11,7 @@
     libsecret
     git
     wget
+    jq
 
     kubectl
     kubernetes-helm

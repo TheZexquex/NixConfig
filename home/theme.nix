@@ -23,4 +23,12 @@
 
     gtk4.theme = config.gtk.theme;
   };
+
+  qt = {
+    enable = true;
+    style = {
+      name = "kvantum";
+    };
+    platformTheme.name = "kvantum";
+  };
 }

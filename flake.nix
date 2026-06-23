@@ -3,15 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:Nixos/nixpkgs/nixos-25.05";
-    catppuccin.url = "github:catppuccin/nix";
-    vicinae.url = "github:vicinaehq/vicinae";
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
 
-    #		 catppuccin-gtk = {
-    #      url = "github:Fausto-Korpsvart/Catppuccin-GTK-Theme";
-    #      flake = false;
-    #    };
+    nixpkgs-stable.url = "github:Nixos/nixpkgs/nixos-25.05";
+
+    catppuccin.url = "github:catppuccin/nix";
+
+    vicinae.url = "github:vicinaehq/vicinae";
+
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
@@ -25,15 +24,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia-shell/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
     };
 
     home-manager = {
@@ -47,19 +40,100 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     nixpkgs-stable,
     catppuccin,
     home-manager,
-    niri,
     affinity-nix,
     pelican,
-    graphite,
+    vicinae,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     stable-pkgs = nixpkgs-stable.legacyPackages.${system};
+
+    jbrFixOverlay = selfOverlay: superOverlay: {
+      jetbrains-jdk-patched = superOverlay.stdenv.mkDerivation rec {
+        pname = "jetbrains-jdk-bin";
+        version = "25.0.3-linux-x64-b329.124";
+
+        src = superOverlay.fetchurl {
+          url = "https://cache-redirector.jetbrains.com/intellij-jbr/jbr_jcef-${version}.tar.gz";
+          hash = "sha256-0qUPSN+zV39BTp/A7OgOIEhs6hewqZwXxZUXXzE053U=";
+        };
+
+        nativeBuildInputs = [
+          superOverlay.autoPatchelfHook
+          superOverlay.makeWrapper
+        ];
+
+        buildInputs = with superOverlay; [
+          libx11
+          libxext
+          libxrender
+          libxtst
+          libglvnd
+          alsa-lib
+          fontconfig
+          freetype
+          glib
+          zlib
+          libXcomposite
+          libXdamage
+          libXfixes
+          libXrandr
+          libXcursor
+          nss
+          nspr
+          dbus
+          atk
+          at-spi2-atk
+          cups
+          pango
+          cairo
+          libdrm
+          libxkbcommon
+          wayland
+          mesa
+        ];
+
+        runtimeDependencies = with superOverlay; [
+          udev
+        ];
+
+        dontConfigure = true;
+        dontBuild = true;
+
+        installPhase = ''
+          mkdir -p $out
+          cp -r * $out/
+        '';
+      };
+
+      jetbrains =
+        superOverlay.jetbrains
+        // {
+          idea = superOverlay.symlinkJoin {
+            name = "idea-ultimate-jbr25-patched";
+            paths = [superOverlay.jetbrains.idea];
+            buildInputs = [superOverlay.makeWrapper];
+            postBuild = ''
+              wrap_idea() {
+                local exe="$1"
+                if [ -e "$exe" ]; then
+                  wrapProgram "$exe" \
+                    --set IDEA_JDK "${selfOverlay.jetbrains-jdk-patched}" \
+                    --set FONTCONFIG_FILE "/etc/fonts/fonts.conf" \
+                    --set FONTCONFIG_PATH "/etc/fonts" \
+                    --prefix LD_LIBRARY_PATH : "${superOverlay.lib.makeLibraryPath [superOverlay.fontconfig superOverlay.freetype]}"
+                fi
+              }
+
+              wrap_idea "$out/bin/idea"
+            '';
+          };
+        };
+    };
   in {
     nixosConfigurations.homenix = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -71,33 +145,20 @@
         ./cache.nix
         ./configuration.nix
         ./hosts/homenix
+        ./programs
+        ./modules
+        vicinae.nixosModules.default
         catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
 
         pelican.nixosModules.default # enable the NixOS moduel
-        {nixpkgs.overlays = [pelican.overlays.default];}
-
-        ({pkgs, ...}: {
+        {
           nixpkgs.overlays = [
+            pelican.overlays.default
             affinity-nix.overlays.default
-            (final: _prev: {
-              stable = import inputs.nixpkgs-stable {
-                system = final.system;
-                config = {
-                  allowUnfree = true;
-                  permittedInsecurePackages = [];
-                };
-              };
-              unstable = import inputs.nixpkgs {
-                system = final.system;
-                config = {
-                  allowUnfree = true;
-                  permittedInsecurePackages = [];
-                };
-              };
-            })
+            jbrFixOverlay
           ];
-        })
+        }
       ];
     };
   };

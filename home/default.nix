@@ -1,14 +1,16 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./programs
     ./packages.nix
     ./hyprland.nix
     ./niri.nix
-    ./gtk.nix
-    ./qt.nix
+    ./theme.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ];
 
   catppuccin = {
     enable = false;
@@ -26,20 +28,9 @@
     sessionVariables = {
       EDITOR = "nvim";
       GTK_THEME = "adw-gtk3-dark";
-      GNOME_KEYRING_CONTROL = "$XDG_RUNTIME_DIR/keyring";
     };
 
     stateVersion = "24.11";
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-    ];
-
-    config.common.default = "gtk";
   };
 
   programs.home-manager.enable = true;

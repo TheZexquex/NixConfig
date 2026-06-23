@@ -1,16 +1,11 @@
-{pkgs, ...}: {
+{...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
-    package = pkgs.hyprland;
     xwayland.enable = true;
     systemd.enable = false;
 
     settings = {
-      env = [
-        "GNOME_KEYRING_CONTROL,$XDG_RUNTIME_DIR/keyring"
-      ];
-
       general = {
         border_size = 0;
         gaps_in = 4;
@@ -26,12 +21,11 @@
       exec-once = [
         # "dbus-update-activation-environment --systemd SSH_AUTH_SOCK"
         "hyprctl setcursor Future 20"
-        "udiskie &"
-        "vicinae server"
         "noctalia-shell"
+        "udiskie &"
 
         # Autostart special workspaces
-        "[workspace special:music silent] pear-music"
+        "[workspace 2 silent] pear-desktop"
       ];
 
       monitor = [
@@ -48,9 +42,9 @@
 
       "$mod" = "SUPER";
       bind = [
-        "$mod, Print, exec, wayfreeze --after-freeze-cmd 'grim -g \"$(slurp -o)\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png'"
-        ",Print, exec, filename=~/Pictures/Screenshots/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png && grim -g \"$(slurp -o)\" -t png \"$filename\" && wl-copy --type image/png < \"$filename\""
-        "$mod, V, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
+        ", Print, exec, hyprshot --freeze --mode region -o ~/Pictures/Screenshots"
+        "$mod, Print, exec, hyprshot -m output -m active -o ~/Pictures/Screenshots"
+        "$mod, V, exec, vicinae vicinae://launch/clipboard/history"
         "$mod, B, exec, firefox"
         "$mod, Q, exec, alacritty"
         "$mod ALT, END, exit"
@@ -109,36 +103,20 @@
 
       input = {
         kb_layout = "de";
+        follow_mouse = 1;
       };
 
-      # -- Fix odd behaviors in IntelliJ IDEs --
       windowrule = [
+        # == Jetbrains IDEs start ==
+        # Centered splash screens
+        "match:class ^jetbrains-.*$, match:title ^(Splash|Welcome to.*)$, float on"
+        "match:class ^jetbrains-.*$, match:title ^(Splash|Welcome to.*)$, center on"
+
+        # Stop losing focus in popups on mouse move
+        "match:class ^jetbrains-.*$, no_follow_mouse on"
+        # == Jetbrains IDEs end ==
+
         "match:class ^(com.github.th_ch.youtube_music)$, workspace special:music"
-        # "opacity 0.9,class:negative:^(firefox|Minecraft.*)$"
-        #! Fix focus issues when dialogs are opened or closed
-        #"windowdance,class:^(jetbrains-.*)$,floating:1"
-        #! Fix splash screen showing in weird places and prevent annoying focus takeovers
-        ##"center,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
-        ##"nofocus,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
-        ##"noborder,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
-
-        #! Center popups/find windows
-        ##"center,class:^(jetbrains-.*)$,title:^( )$,floating:1"
-        ##"stayfocused,class:^(jetbrains-.*)$,title:^( )$,floating:1"
-        ##"noborder,class:^(jetbrains-.*)$,title:^( )$,floating:1"
-        #! Disable window flicker when autocomplete or tooltips appear
-        #"nofocus,class:^(jetbrains-.*)$,title:^(win.*)$,floating:1"
-
-        #"noinitialfocus, class:^(.*jetbrains.*)$, title:^(win.*)$"
-        #"nofocus, class:^(.*jetbrains.*)$, title:^(win.*)$
-        # fix tab dragging (always have a single space character as their title)"
-        #"noinitialfocus, class:^(.*jetbrains.*)$, title:^\\s$"
-        #"nofocus, class:^(.*jetbrains.*)$, title:^\\s$"
-
-        #"size 622 652,class:(clipse)"
-        #"size 622 652,class:(satty)"
-        #"float,class:(clipse)"
-        #"float,class:(satty)"
 
         "match:class ^(.*pulsemeeter.*)$, float on, center on"
       ];
