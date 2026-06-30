@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   sddm-noctalia-bg-path = "/var/lib/sddm";
   sddm-noctalia-bg-name = "noctalia-background.jpg";
   sddm-astronaut =
@@ -64,7 +68,7 @@ in {
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm = {
     enable = true;
-    package = pkgs.kdePackages.sddm;
+    package = lib.mkForce pkgs.kdePackages.sddm;
     wayland.enable = true;
     extraPackages = with pkgs; [
       sddm-astronaut
@@ -72,7 +76,7 @@ in {
     ];
     theme = "${sddm-astronaut}/share/sddm/themes/sddm-astronaut-theme";
   };
-  services.desktopManager.plasma6.enable = false;
+  services.desktopManager.plasma6.enable = true;
   services.displayManager.gdm.enable = false; # broken
 
   programs.hyprland = {

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./programs
     ./packages.nix
@@ -31,6 +31,10 @@
     };
 
     stateVersion = "24.11";
+  };
+
+  systemd.user.sessionVariables = {
+    QML2_IMPORT_PATH = pkgs.lib.mkForce "/home/thezexquex/.nix-profile/lib/qt-6/qml:/home/thezexquex/.nix-profile/lib/qt-5.15.18/qml";
   };
 
   programs.home-manager.enable = true;

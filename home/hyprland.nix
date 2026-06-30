@@ -21,11 +21,12 @@
       exec-once = [
         # "dbus-update-activation-environment --systemd SSH_AUTH_SOCK"
         "hyprctl setcursor Future 20"
-        "noctalia-shell"
+        "env QML2_IMPORT_PATH=\"$HOME/.nix-profile/lib/qt-6/qml\" noctalia-shell"
         "udiskie &"
 
         # Autostart special workspaces
         "[workspace 2 silent] pear-desktop"
+        "[workspace 2 silent] discord"
       ];
 
       monitor = [
@@ -113,11 +114,9 @@
         "match:class ^jetbrains-.*$, match:title ^(Splash|Welcome to.*)$, center on"
 
         # Stop losing focus in popups on mouse move
-        "match:class ^jetbrains-.*$, no_follow_mouse on"
+        #"match:class ^jetbrains-.*$, no_follow_mouse on"
         # == Jetbrains IDEs end ==
-
-        "match:class ^(com.github.th_ch.youtube_music)$, workspace special:music"
-
+        "match:class ^(.*obsidian.*)$, float on, center on, pin on"
         "match:class ^(.*pulsemeeter.*)$, float on, center on"
       ];
     };

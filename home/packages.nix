@@ -35,6 +35,7 @@
     # Office
     thunderbird
     onlyoffice-desktopeditors
+    libreoffice
     trelby
 
     # Fileshare
@@ -76,7 +77,6 @@
     clinfo
 
     # Remote
-    anydesk
     weylus
     parsec-bin
     scrcpy
@@ -127,8 +127,8 @@
     jetbrains.goland
     jetbrains.datagrip
     jetbrains.pycharm
-    android-studio
-    godot
+    # android-studio
+    godot_4_7-mono
     unityhub
     vscode
     zed-editor
@@ -219,6 +219,8 @@
     adw-gtk3
     gnome-themes-extra
     gtk-engine-murrine
+    kdePackages.kirigami
+    kdePackages.breeze
     sassc
     catppuccin
     # catppuccin-kde
@@ -226,8 +228,6 @@
     waypaper
     wpgtk
     pywal
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qt5ct
     kdePackages.qt6ct
 
     # Graphic Programs

@@ -7,8 +7,7 @@
   lib,
   modulesPath,
   ...
-}:
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -19,9 +18,9 @@
     "nvme"
     "usbhid"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/84e53ff1-21cd-4633-8067-6e55e2fc675f";
@@ -47,7 +46,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/b042a180-5e64-4e3b-800b-edecabfc6275"; }
+    {device = "/dev/disk/by-uuid/b042a180-5e64-4e3b-800b-edecabfc6275";}
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -55,6 +54,7 @@
 
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
 
     extraPackages = with pkgs; [
       rocmPackages.clr.icd
@@ -65,5 +65,5 @@
     ];
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
 }
