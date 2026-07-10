@@ -59,6 +59,89 @@
   } @ inputs: let
     system = "x86_64-linux";
     stable-pkgs = nixpkgs-stable.legacyPackages.${system};
+
+    jbrFixOverlay = selfOverlay: superOverlay: {
+      jetbrains-jdk-patched = superOverlay.stdenv.mkDerivation rec {
+        pname = "jetbrains-jdk-bin";
+        version = "25.0.3-linux-x64-b329.124";
+
+        src = superOverlay.fetchurl {
+          url = "https://cache-redirector.jetbrains.com/intellij-jbr/jbr_jcef-${version}.tar.gz";
+          hash = "sha256-0qUPSN+zV39BTp/A7OgOIEhs6hewqZwXxZUXXzE053U=";
+        };
+
+        nativeBuildInputs = [
+          superOverlay.autoPatchelfHook
+          superOverlay.makeWrapper
+        ];
+
+        buildInputs = with superOverlay; [
+          libx11
+          libxext
+          libxrender
+          libxtst
+          libglvnd
+          alsa-lib
+          fontconfig
+          freetype
+          glib
+          zlib
+          libXcomposite
+          libXdamage
+          libXfixes
+          libXrandr
+          libXcursor
+          nss
+          nspr
+          dbus
+          atk
+          at-spi2-atk
+          cups
+          pango
+          cairo
+          libdrm
+          libxkbcommon
+          wayland
+          mesa
+        ];
+
+        runtimeDependencies = with superOverlay; [
+          udev
+        ];
+
+        dontConfigure = true;
+        dontBuild = true;
+
+        installPhase = ''
+          mkdir -p $out
+          cp -r * $out/
+        '';
+      };
+
+      jetbrains =
+        superOverlay.jetbrains
+        // {
+          idea = superOverlay.symlinkJoin {
+            name = "idea-ultimate-jbr25-patched";
+            paths = [superOverlay.jetbrains.idea];
+            buildInputs = [superOverlay.makeWrapper];
+            postBuild = ''
+              wrap_idea() {
+                local exe="$1"
+                if [ -e "$exe" ]; then
+                  wrapProgram "$exe" \
+                    --set IDEA_JDK "${selfOverlay.jetbrains-jdk-patched}" \
+                    --set FONTCONFIG_FILE "/etc/fonts/fonts.conf" \
+                    --set FONTCONFIG_PATH "/etc/fonts" \
+                    --prefix LD_LIBRARY_PATH : "${superOverlay.lib.makeLibraryPath [superOverlay.fontconfig superOverlay.freetype]}"
+                fi
+              }
+
+              wrap_idea "$out/bin/idea"
+            '';
+          };
+        };
+    };
   in {
     nixosConfigurations.homenix = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -82,6 +165,7 @@
           nixpkgs.overlays = [
             pelican.overlays.default
             affinity-nix.overlays.default
+            jbrFixOverlay
           ];
         }
       ];
