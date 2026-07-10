@@ -1,180 +1,112 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.noctalia.homeModules.default
   ];
 
-  programs.noctalia-shell = {
+  age.secrets.calendar-email.file = ../../secrets/calendar-email.age;
+
+  programs.noctalia = let
+    padding-global = 6;
+    radius-global = 6;
+    margin-global = 10;
+  in {
     enable = true;
-    plugins = {
-      sources = [
-        {
-          enabled = true;
-          name = "Official Noctalia Plugins";
-          url = "https://github.com/noctalia-dev/noctalia-plugins";
-        }
-      ];
-      states = {
-        screenshot = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-      };
-      version = 2;
-    };
+
+    systemd.enable = true;
+
     settings = {
-      appLauncher = {
-        backgroundOpacity = 1.0;
-        customLaunchPrefix = "";
-        customLaunchPrefixEnabled = false;
-        enableClipboardHistory = false;
-        pinnedExecs = [];
-        position = "center";
-        sortByMostUsed = true;
-        terminalCommand = "xterm -e";
-        useApp2Unit = false;
+      bar.order = ["main"];
+      bar.main = {
+        enable = true;
+        position = "top";
+        audo_hide = false;
+        background_opacity = 0.95;
+
+        thickness = 40;
+
+        shadow = false;
+        radius = radius-global;
+        margin_ends = margin-global;
+        widget_spacing = padding-global;
+        padding = padding-global;
+
+        font_family = "UbuntuMono Nerd Font";
+        font_weight = "normal";
+
+        capsule = true;
+        capsule_radius = 5;
+        capsule_padding = 10;
+        capusle_thickness = 0.5;
+        # capsule_border = "primary";
+
+        start = [
+          "control-center"
+          "workspaces"
+          "active_window"
+          "notifications"
+          "cat"
+        ];
+
+        center = [
+          "audio_visualizer"
+        ];
+
+        end = [
+          "tray"
+          "volume"
+          "sysmon"
+          "network"
+          "bluetooth"
+          "clock"
+        ];
+      };
+
+      control_center = {
+        scale = 1.3;
+        position = "close_to_bar_button";
+        sidebar = "full";
+        sidebar_section = "full";
       };
 
       audio = {
-        cavaFrameRate = 60;
-        mprisBlacklist = [];
-        preferredPlayer = "";
-        visualizerType = "linear";
-        volumeOverdrive = false;
-        volumeStep = 5;
+        enable_overdrive = true;
+        enable_sounds = true;
+        notification_sound = "${inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/sounds/notification.wav";
+        volume_change_sound = "${inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/sounds/volume-change.wav";
       };
 
-      bar = {
-        backgroundOpacity = 1.0;
-        density = "comfortable";
-        exclusive = true;
-        floating = true;
-        marginHorizontal = 0.50;
-        marginVertical = 0.50;
-        monitors = [];
-        outerCorners = true;
-        position = "top";
-        showCapsule = true;
+      calendar = {
+        enabled = true;
+        refresh_minutes = 10;
 
-        widgets = {
-          left = [
-            {
-              id = "ControlCenter";
-              useDistroLogo = true;
-            }
-            {
-              id = "Workspace";
-              hideUnoccupied = false;
-              labelMode = "none";
-            }
-            {
-              id = "ActiveWindow";
-            }
-            {
-              id = "NotificationHistory";
-            }
-          ];
-
-          center = [
-            {
-              id = "AudioVisualizer";
-            }
-          ];
-
-          right = [
-            {id = "Tray";}
-
-            {id = "Volume";}
-            {id = "SystemMonitor";}
-            {id = "WiFi";}
-            {id = "Bluetooth";}
-            {
-              id = "Clock";
-              formatHorizontal = "HH:mm:ss";
-              formatVertical = "HH mm ss";
-              useMonospacedFont = true;
-              usePrimaryColor = true;
-            }
-          ];
-        };
-      };
-
-      battery = {
-        chargingMode = 0;
-      };
-
-      brightness = {
-        brightnessStep = 5;
-        enableDdcSupport = false;
-        enforceMinimum = true;
-      };
-
-      colorSchemes = {
-        darkMode = true;
-        generateTemplatesForPredefined = true;
-        manualSunrise = "06:30";
-        manualSunset = "18:30";
-        matugenSchemeType = "scheme-fruit-salad";
-        predefinedScheme = "Catppuccin";
-        schedulingMode = "off";
-        useWallpaperColors = true;
-      };
-
-      controlCenter = {
-        position = "close_to_bar_button";
-
-        cards = [
-          {
-            id = "profile-card";
-            enabled = true;
-          }
-          {
-            id = "shortcuts-card";
-            enabled = true;
-          }
-          {
-            id = "audio-card";
-            enabled = true;
-          }
-          {
-            id = "weather-card";
-            enabled = true;
-          }
-          {
-            id = "media-sysmon-card";
-            enabled = true;
-          }
-        ];
-
-        shortcuts = {
-          left = [
-            {id = "WiFi";}
-            {id = "Bluetooth";}
-            {id = "ScreenRecorder";}
-            {id = "WallpaperSelector";}
-          ];
-
-          right = [
-            {id = "Notifications";}
-            {id = "PowerProfile";}
-            {id = "KeepAwake";}
-            {id = "NightLight";}
-          ];
+        account = {
+          private_google = {
+            type = "google";
+            name = "Google";
+          };
         };
       };
 
       dock = {
         enabled = false;
-        backgroundOpacity = 1.0;
-        colorizeIcons = false;
-        displayMode = "always_visible";
-        floatingRatio = 1.0;
-        monitors = [];
-        onlySameOutput = true;
-        pinnedApps = [];
-        size = 1;
       };
 
-      general = {
+      shell = {
+        # UI
+        corner_radius_scale = 0.5;
+        font_family = "UbuntuMono Nerd Font";
+        app_icon_colorize = false;
+
+        # Lang and time
+        time_format = "{:%H:%M:%S}";
+
+        # Other
+        avatar_path = "/home/thezexquex/avatar.png";
+
         animationDisabled = false;
         animationSpeed = 0.5;
         avatarImage = "/home/thezexquex/avatar.png";
@@ -188,9 +120,44 @@
         scaleRatio = 1.0;
         screenRadiusRatio = 1;
         shadowDirection = "bottom_right";
-        shadowOffsetX = 2;
-        shadowOffsetY = 3;
         showScreenCorners = false;
+
+        panel = {
+          open_near_click_control_center = true;
+        };
+
+        screenshot = {
+          directory = "~/Pictures/Screenshots";
+          filename_pattern = "Screenshot-%Y-%m-%d_%H-%M-%S";
+          freeze_screen = true;
+        };
+      };
+
+      widget = {
+        clock = {
+          format = "{:%b %e. - %H:%M:%S}";
+        };
+
+        tray = {
+          drawer = true;
+          drawer_columns = 3;
+        };
+
+        network = {
+          show_label = false;
+        };
+
+        control-center = {
+          custom_image = "${inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/images/distros/nixos.svg";
+          custom_image_colorize = true;
+        };
+
+        cat = {
+          type = "noctalia/bongocat:cat";
+          audio_spectrum = true;
+          input_devices = ["/dev/input/by-id/*-event-*"];
+          tappy_mode = true;
+        };
       };
 
       hooks = {
@@ -200,125 +167,62 @@
       };
 
       location = {
-        name = "Munich, Germany";
-        firstDayOfWeek = -1;
-        analogClockInCalendar = false;
-        monthBeforeDay = false;
-        showCalendarEvents = true;
-        showCalendarWeather = true;
-        showWeekNumberInCalendar = true;
-        use12hourFormat = false;
-        useFahrenheit = false;
-        weatherEnabled = true;
+        adress = "Munich, Germany";
       };
 
-      network = {
-        wifiEnabled = true;
-      };
-
-      nightLight = {
-        enabled = false;
-        forced = false;
-        autoSchedule = true;
-        dayTemp = "6500";
-        nightTemp = "4000";
-        manualSunrise = "06:30";
-        manualSunset = "18:30";
+      weather = {
+        enabled = true;
+        refresh_minutes = 10;
+        unit = "metric";
+        effects = true;
       };
 
       notifications = {
-        enabled = true;
-        backgroundOpacity = 1.0;
-        location = "top_right";
-        overlayLayer = true;
-        respectExpireTimeout = false;
-        doNotDisturb = false;
-        monitors = [];
-        criticalUrgencyDuration = 15;
-        normalUrgencyDuration = 8;
-        lowUrgencyDuration = 3;
-      };
-
-      osd = {
-        enabled = true;
-        autoHideMs = 2000;
-        location = "top_right";
-        overlayLayer = true;
+        enable_daemon = true;
+        show_app_name = true;
+        show_actions = true;
+        position = "top_right";
+        layer = "overlay";
+        scale = 1.0;
+        background_opacity = 0.95;
+        offset_x = 20;
+        offset_y = 8;
+        collapse_on_dismiss = true;
         monitors = [];
       };
 
-      screenRecorder = {
-        directory = "";
-        frameRate = 60;
-        quality = "very_high";
-        showCursor = true;
-        videoCodec = "h264";
-        videoSource = "portal";
-        audioCodec = "opus";
-        audioSource = "default_output";
-        colorRange = "limited";
+      plugins = {
+        enabled = [
+          "noctalia/screen_recorder"
+          "noctalia/bongocat"
+        ];
+
+        source = {
+          name = "official";
+          kind = "git";
+          location = "https://github.com/noctalia-dev/official-plugins";
+          auto_update = false;
+        };
       };
 
-      templates = {
-        enableUserTemplates = true;
-        alacritty = true;
-        code = true;
-        discord = false;
-        discord_armcord = false;
-        discord_dorion = false;
-        discord_equibop = false;
-        discord_lightcord = false;
-        discord_vesktop = false;
-        discord_webcord = false;
-        foot = false;
-        fuzzel = false;
-        ghostty = false;
-        gtk = true;
-        kcolorscheme = true;
-        kitty = false;
-        pywalfox = true;
-        qt = true;
-        vicinae = true;
-        walker = false;
-        wezterm = false;
-      };
+      theme = {
+        mode = "dark";
+        source = "wallpaper";
+        wallpaper_scheme = "m3-content";
 
-      ui = {
-        fontDefault = "UbuntuMono Nerd Font";
-        fontDefaultScale = 1.0;
-        fontFixed = "DejaVu Sans Mono";
-        fontFixedScale = 1.0;
-        panelsAttachedToBar = true;
-        settingsPanelAttachToBar = false;
-        tooltipsEnabled = true;
+        templates = {
+          enable_builtin_templates = true;
+          buildin_ids = [];
+        };
       };
 
       wallpaper = {
         enabled = true;
-        defaultWallpaper = "/home/thezexquex/Pictures/wallpapers/wallpaper/bloodrock-steppes.png";
+        default.path = "/home/thezexquex/Pictures/wallpapers/wallpaper/bloodrock-steppes.png";
         directory = "/home/thezexquex/Pictures/wallpapers";
-        enableMultiMonitorDirectories = false;
-        fillColor = "#000000";
-        fillMode = "crop";
-        monitors = [];
-        overviewEnabled = false;
-        panelPosition = "follow_bar";
-        randomEnabled = false;
-        randomIntervalSec = 300;
-        recursiveSearch = true;
-        setWallpaperOnAllMonitors = true;
-        transitionDuration = 1500;
-        transitionEdgeSmoothness = 0.05;
-        transitionType = "random";
+        fill_color = "#000000";
+        fill_mode = "crop";
       };
     };
-
-    user-templates = ''
-      [config]
-      [templates.nvim-base16]
-      input_path = "~/.config/nvim/lua/matugen-template.lua"
-      output_path = "~/.config/nvim/lua/matugen.lua"
-      post_hook = 'pkill -SIGUSR1 nvim'
-    '';
   };
 }

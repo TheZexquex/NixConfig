@@ -62,6 +62,7 @@
 
     # kdePackages.kdenlive
     davinci-resolve-studio
+    kdePackages.kdenlive
     gnome-network-displays
     wayvnc
     tigervnc
@@ -152,10 +153,10 @@
     obsidian
 
     # This and that
-    wine
+    wineWow64Packages.stable
     winboat
     # stable-pkgs.bottles
-    # stable-pkgs.lutris
+    lutris
     ntfs3g
 
     ungoogled-chromium
@@ -206,6 +207,7 @@
     gcc
     docker
     appimage-run
+    hydra-check
 
     # Passwords
     bitwarden-desktop
@@ -232,6 +234,7 @@
 
     # Graphic Programs
     gimp3
+    inkscape
     krita
     aseprite
 

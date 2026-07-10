@@ -65,9 +65,8 @@ in {
     };
   };
 
-  # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm = {
-    enable = true;
+    enable = false;
     package = lib.mkForce pkgs.kdePackages.sddm;
     wayland.enable = true;
     extraPackages = with pkgs; [
@@ -101,6 +100,13 @@ in {
       xdg-desktop-portal-hyprland
     ];
 
-    config.common.default = "gtk";
+    config.common.default = ["gtk" "hyprland"];
+  };
+
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = ["nautilus.desktop"];
+    };
   };
 }

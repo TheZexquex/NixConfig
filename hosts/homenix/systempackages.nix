@@ -7,6 +7,7 @@
     affinity-v3
 
     inputs.graphite.packages.x86_64-linux.default
+    inputs.agenix.packages.x86_64-linux.default
 
     libsecret
     git

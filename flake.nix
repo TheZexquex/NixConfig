@@ -25,7 +25,12 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell/legacy-v4";
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -35,6 +40,8 @@
     };
 
     graphite.url = "github:GraphiteEditor/Graphite";
+
+    agenix.url = "github:ryantm/agenix";
 
     pelican.url = "github:Hythera/nix-pelican";
   };
@@ -47,6 +54,7 @@
     affinity-nix,
     pelican,
     vicinae,
+    agenix,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -67,6 +75,7 @@
         vicinae.nixosModules.default
         catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
+        agenix.nixosModules.default
 
         pelican.nixosModules.default # enable the NixOS moduel
         {

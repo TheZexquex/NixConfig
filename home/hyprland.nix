@@ -21,7 +21,6 @@
       exec-once = [
         # "dbus-update-activation-environment --systemd SSH_AUTH_SOCK"
         "hyprctl setcursor Future 20"
-        "env QML2_IMPORT_PATH=\"$HOME/.nix-profile/lib/qt-6/qml\" noctalia-shell"
         "udiskie &"
 
         # Autostart special workspaces
@@ -30,8 +29,8 @@
       ];
 
       monitor = [
-        "DP-3, 2560x1440@144, 0x0, 1"
-        "DP-2, 2560x1440@144, 2560x0, 1"
+        "DP-3, 2560x1440@144, 0x0, 1, vrr, 0"
+        "DP-2, 2560x1440@144, 2560x0, 1, vrr, 0"
         "HEADLESS-3, 1920x1080, 0x0, 1"
       ];
 
@@ -49,7 +48,7 @@
         "$mod, B, exec, firefox"
         "$mod, Q, exec, alacritty"
         "$mod ALT, END, exit"
-        "$mod, L, exec, noctalia-shell ipc call sessionMenu lock"
+        "$mod, L, exec, noctalia msg session lock"
 
         "$mod, C, killactive"
         "$mod, F, fullscreen"
@@ -110,6 +109,7 @@
       windowrule = [
         # == Jetbrains IDEs start ==
         # Centered splash screens
+        "match:class ^upc.exe$, float on, center on"
         "match:class ^jetbrains-.*$, match:title ^(Splash|Welcome to.*)$, float on"
         "match:class ^jetbrains-.*$, match:title ^(Splash|Welcome to.*)$, center on"
 
