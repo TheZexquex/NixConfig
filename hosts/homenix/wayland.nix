@@ -88,10 +88,10 @@ in {
     #portalPackage =  inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri;
-  };
+  #programs.niri = {
+  #  enable = true;
+  #  package = pkgs.niri;
+  #};
 
   xdg.portal = {
     enable = true;

@@ -195,6 +195,7 @@
         enabled = [
           "noctalia/screen_recorder"
           "noctalia/bongocat"
+          "noctalia/timer"
         ];
 
         source = {

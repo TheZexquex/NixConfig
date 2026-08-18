@@ -1,15 +1,11 @@
-{ ... }: {
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  
-  boot.loader = {
-    systemd-boot.enable = false;
-    efi.canTouchEfiVariables = true;
+{...}: {
+  boot.initrd.kernelModules = ["amdgpu"];
 
-    grub = {
+  boot.loader = {
+    grub.enable = false;
+    systemd-boot = {
       enable = true;
-      useOSProber = true;
-      efiSupport = true;
-      devices = [ "nodev" ];
     };
+    efi.canTouchEfiVariables = true;
   };
 }

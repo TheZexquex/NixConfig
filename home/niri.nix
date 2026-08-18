@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   programs.niri = {
-    enable = true;
+    enable = false;
     settings = {
       input = {
         keyboard.xkb.layout = "de";

@@ -3,7 +3,7 @@
     ./programs
     ./packages.nix
     ./hyprland.nix
-    ./niri.nix
+    #./niri.nix
     ./theme.nix
   ];
 

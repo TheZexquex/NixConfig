@@ -24,6 +24,11 @@
     yazi
     superfile
     nautilus
+
+    kdePackages.dolphin
+    kdePackages.dolphin-plugins
+    krename
+
     krusader
     filezilla
 
@@ -41,8 +46,9 @@
     # Fileshare
     rquickshare
     localsend
-    celeste
     nextcloud-client
+    kopia
+    kopia-ui
 
     # Java
     maven
@@ -85,6 +91,7 @@
     # Audio
     qpwgraph
     pulsemeeter
+    pwvucontrol
     wf-recorder
     tenacity
     # ocenaudio
@@ -95,6 +102,7 @@
     btop
     net-tools
     bat
+    ripgrep
 
     ashell
     inputs.noctalia.packages.${system}.default
@@ -154,7 +162,7 @@
 
     # This and that
     wineWow64Packages.stable
-    winboat
+    # winboat
     # stable-pkgs.bottles
     lutris
     ntfs3g
@@ -199,6 +207,8 @@
     go
     git
     bun
+    pnpm
+    nodejs_26
     cargo
     python3
     # python312Packages.pip
@@ -220,7 +230,6 @@
     matugen
     adw-gtk3
     gnome-themes-extra
-    gtk-engine-murrine
     kdePackages.kirigami
     kdePackages.breeze
     sassc

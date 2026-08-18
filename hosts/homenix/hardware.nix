@@ -55,14 +55,6 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-
-    extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-      mesa
-      libva
-      libvdpau-va-gl
-      mesa.opencl
-    ];
   };
 
   services.xserver.videoDrivers = ["amdgpu"];

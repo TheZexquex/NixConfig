@@ -15,7 +15,7 @@
       imports = [
         # inputs.hyprpanel.homeManagerModules.hyprpanel
         inputs.catppuccin.homeModules.catppuccin
-        inputs.niri.homeModules.niri
+        #inputs.niri.homeModules.niri
         inputs.vicinae.homeManagerModules.default
         inputs.agenix.homeManagerModules.default
         ../../home

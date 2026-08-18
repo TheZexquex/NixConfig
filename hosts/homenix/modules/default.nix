@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   imports = [
     ./firewall.nix
     ./wifi.nix
@@ -6,5 +6,6 @@
     ./boot.nix
     ./sunshine.nix
     ./wireguard.nix
+    ./pipewire.nix
   ];
 }
