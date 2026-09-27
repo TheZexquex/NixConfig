@@ -1,11 +1,10 @@
 {...}: {
   imports = [
     ../common
-    ./configuration.nix
+    ./configuration
     ./modules
     ./hardware.nix
     ./systempackages.nix
-    ./mc-experiments
     ./desktop.nix
   ];
 }

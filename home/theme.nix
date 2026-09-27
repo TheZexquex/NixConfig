@@ -6,6 +6,8 @@
   gtk = {
     enable = true;
 
+    gtk2.force = true;
+
     cursorTheme = {
       name = "Future";
     };

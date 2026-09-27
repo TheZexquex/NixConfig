@@ -22,6 +22,7 @@
         # "dbus-update-activation-environment --systemd SSH_AUTH_SOCK"
         "hyprctl setcursor Future 20"
         "udiskie &"
+        "kwalletd6"
 
         # Autostart special workspaces
         "[workspace 2 silent] pear-desktop"

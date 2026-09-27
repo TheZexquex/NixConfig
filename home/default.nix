@@ -1,23 +1,34 @@
-{pkgs, ...}: {
-  imports = [
-    ./programs
-    ./packages.nix
-    ./hyprland.nix
-    #./niri.nix
-    ./theme.nix
-  ];
+{
+  pkgs,
+  osConfig,
+  ...
+}: {
+  imports = let
+    hostName = osConfig.networking.hostName;
+  in
+    [
+      ./programs
+      ./hyprland.nix
+      #./niri.nix
+      ./theme.nix
+
+      ../home/packages/shared.nix
+    ]
+    ++ (
+      if hostName == "homenix"
+      then [../home/packages/homenix.nix]
+      else []
+    )
+    ++ (
+      if hostName == "travelnix"
+      then [../home/packages/travelnix.nix]
+      else []
+    );
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "electron-39.8.10"
   ];
-
-  catppuccin = {
-    enable = false;
-    hyprland.enable = false;
-    accent = "peach";
-    flavor = "macchiato";
-  };
 
   home = {
     username = "thezexquex";

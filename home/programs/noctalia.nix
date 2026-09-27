@@ -48,6 +48,7 @@
           "workspaces"
           "active_window"
           "notifications"
+          "weather"
           "cat"
         ];
 
@@ -82,6 +83,8 @@
       calendar = {
         enabled = true;
         refresh_minutes = 10;
+
+        week_numbers = true;
 
         account = {
           private_google = {
@@ -148,7 +151,7 @@
         };
 
         control-center = {
-          custom_image = "${inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/images/distros/nixos.svg";
+          custom_image = "$ security.pam.services.hyprland.enableKwallet = true;{inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/images/distros/nixos.svg";
           custom_image_colorize = true;
         };
 
@@ -157,6 +160,9 @@
           audio_spectrum = true;
           input_devices = ["/dev/input/by-id/*-event-*"];
           tappy_mode = true;
+        };
+        audio_visualizer = {
+          mirrored = false;
         };
       };
 

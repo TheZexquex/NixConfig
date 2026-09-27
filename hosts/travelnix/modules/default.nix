@@ -2,6 +2,5 @@
   imports = [
     ./firewall.nix
     ./boot.nix
-    ./sunshine.nix
   ];
 }

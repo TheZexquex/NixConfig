@@ -1,9 +1,9 @@
-{ ... }: {
+{config, ...}: {
   hardware.bluetooth = {
     enable = true;
     settings = {
       General = {
-        Name = "homenix";
+        Name = "${config.networking.hostName}";
         ControllerMode = "dual";
         FastConnect = "true";
         Experimental = "true";

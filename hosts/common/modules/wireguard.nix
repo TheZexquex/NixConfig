@@ -11,9 +11,11 @@
 
       privateKeyFile = "/home/thezexquex/wireguard/client_private.key";
 
+      # hetznix
       peers = [
         {
           publicKey = "8JYgM07FN25faG2SILgopmvG4XupsQMpSjngYTRQOWY=";
+          # Tunnel only requests to this ip
           allowedIPs = [
             "10.66.66.1/32"
           ];

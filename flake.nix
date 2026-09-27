@@ -6,7 +6,7 @@
 
     nixpkgs-stable.url = "github:Nixos/nixpkgs/nixos-25.05";
 
-    catppuccin.url = "github:catppuccin/nix";
+    # catppuccin.url = "github:catppuccin/nix";
 
     vicinae.url = "github:vicinaehq/vicinae";
 
@@ -44,47 +44,85 @@
     agenix.url = "github:ryantm/agenix";
 
     pelican.url = "github:Hythera/nix-pelican";
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixpkgs,
     nixpkgs-stable,
-    catppuccin,
+    # catppuccin,
     home-manager,
     affinity-nix,
     pelican,
     vicinae,
     agenix,
+    disko,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     stable-pkgs = nixpkgs-stable.legacyPackages.${system};
   in {
-    nixosConfigurations.homenix = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit inputs;
-        inherit stable-pkgs;
-      };
-      modules = [
-        ./cache.nix
-        ./configuration.nix
-        ./hosts/homenix
-        ./programs
-        ./modules
-        vicinae.nixosModules.default
-        catppuccin.nixosModules.catppuccin
-        home-manager.nixosModules.home-manager
-        agenix.nixosModules.default
+    nixosConfigurations = {
+      homenix = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          inherit stable-pkgs;
+        };
+        modules = [
+          {nixpkgs.hostPlatform = system;}
+          ./cache.nix
+          ./hosts/homenix
+          ./programs
+          ./modules
+          vicinae.nixosModules.default
+          # catppuccin.nixosModules.catppuccin
+          home-manager.nixosModules.home-manager
+          agenix.nixosModules.default
 
-        pelican.nixosModules.default # enable the NixOS moduel
-        {
-          nixpkgs.overlays = [
-            pelican.overlays.default
-            affinity-nix.overlays.default
-          ];
-        }
-      ];
+          pelican.nixosModules.default # enable the NixOS moduel
+          {
+            nixpkgs.overlays = [
+              pelican.overlays.default
+              affinity-nix.overlays.default
+            ];
+          }
+        ];
+      };
+
+      travelnix = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          inherit stable-pkgs;
+        };
+        modules = [
+          {nixpkgs.hostPlatform = system;}
+          ./cache.nix
+          ./hosts/travelnix
+          ./programs
+          ./modules
+
+          vicinae.nixosModules.default
+          # catppuccin.nixosModules.catppuccin
+          home-manager.nixosModules.home-manager
+          agenix.nixosModules.default
+        ];
+      };
+
+      hetznix = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          inherit stable-pkgs;
+        };
+        modules = [
+          {nixpkgs.hostPlatform = system;}
+          ./hosts/hetznix
+          disko.nixosModules.disko
+        ];
+      };
     };
   };
 }
