@@ -76,6 +76,7 @@
 
     # clipse Cool terminal clipboard (works only sometimes)
     bat
+    ripgrep # grep but faster
     gzip
     zip
     unzip

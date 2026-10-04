@@ -8,6 +8,7 @@
   in
     [
       ./programs
+      ./scripts
       ./hyprland.nix
       #./niri.nix
       ./theme.nix
