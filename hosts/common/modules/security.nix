@@ -1,4 +1,3 @@
 {...}: {
-  security.pam.services.plasmalogin.kwallet.enable = true;
-  security.pam.services.login.kwallet.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 }
