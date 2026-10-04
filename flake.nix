@@ -121,6 +121,7 @@
           {nixpkgs.hostPlatform = system;}
           ./hosts/hetznix
           disko.nixosModules.disko
+          agenix.nixosModules.default
         ];
       };
     };

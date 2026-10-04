@@ -15,6 +15,7 @@
     superfile
     kdePackages.dolphin
     kdePackages.dolphin-plugins
+    kdePackages.breeze-gtk
     krename
     filezilla
 
@@ -74,6 +75,7 @@
     wl-clipboard
 
     # clipse Cool terminal clipboard (works only sometimes)
+    bat
     gzip
     zip
     unzip
@@ -156,6 +158,9 @@
     python3
     nodejs
     gcc
+    rustc
+    webkitgtk_6_0
+    librsvg
 
     # Passwords
     bitwarden-desktop
