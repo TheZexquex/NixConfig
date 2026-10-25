@@ -12,6 +12,7 @@
       ./hyprland.nix
       #./niri.nix
       ./theme.nix
+      ./gc.nix
 
       ../home/packages/shared.nix
     ]

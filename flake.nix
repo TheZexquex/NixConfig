@@ -56,7 +56,6 @@
     agenix,
     disko,
     openxlr,
-    librewave,
     ...
   } @ inputs: let
     system = "x86_64-linux";
