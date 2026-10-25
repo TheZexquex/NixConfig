@@ -42,6 +42,8 @@ in {
   };
 
   home.file."./.config/nvim/lua/thezexquex/init.lua".text = ''
+    vim.g.nix_lazy_path = "${pkgs.vimPlugins.lazy-nvim}"
+    vim.g.nix_treesitter_parsers = "${treesitterParsers}"
     vim.opt.runtimepath:append("${treesitterParsers}")
   '';
 

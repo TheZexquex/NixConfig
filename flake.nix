@@ -6,11 +6,11 @@
 
     nixpkgs-stable.url = "github:Nixos/nixpkgs/nixos-25.05";
 
-    # catppuccin.url = "github:catppuccin/nix";
-
     vicinae.url = "github:vicinaehq/vicinae";
 
     affinity-nix.url = "github:mrshmllow/affinity-nix";
+
+    openxlr.url = "github:emaspa/openxlr";
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
@@ -18,11 +18,6 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-
-    #niri = {
-    #  url = "github:sodiboo/niri-flake";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
@@ -54,18 +49,21 @@
   outputs = {
     nixpkgs,
     nixpkgs-stable,
-    # catppuccin,
     home-manager,
     affinity-nix,
     pelican,
     vicinae,
     agenix,
     disko,
+    openxlr,
+    librewave,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     stable-pkgs = nixpkgs-stable.legacyPackages.${system};
   in {
+    formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+
     nixosConfigurations = {
       homenix = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -75,15 +73,19 @@
         modules = [
           {nixpkgs.hostPlatform = system;}
           ./cache.nix
+          ./config.nix
           ./hosts/homenix
           ./programs
           ./modules
+
+          openxlr.nixosModules.default
+          {services.openxlr.enable = true;}
+
           vicinae.nixosModules.default
-          # catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           agenix.nixosModules.default
 
-          pelican.nixosModules.default # enable the NixOS moduel
+          pelican.nixosModules.default
           {
             nixpkgs.overlays = [
               pelican.overlays.default
@@ -101,12 +103,12 @@
         modules = [
           {nixpkgs.hostPlatform = system;}
           ./cache.nix
+          ./config.nix
           ./hosts/travelnix
           ./programs
           ./modules
 
           vicinae.nixosModules.default
-          # catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           agenix.nixosModules.default
         ];

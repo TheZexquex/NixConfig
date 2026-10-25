@@ -15,6 +15,7 @@
     superfile
     kdePackages.dolphin
     kdePackages.dolphin-plugins
+    kdePackages.ark
     kdePackages.breeze-gtk
     krename
     filezilla
@@ -45,6 +46,7 @@
 
     # Screenshots + Recording + Editing
     satty
+    wayscriber
     grim
     flameshot
     slurp
@@ -67,7 +69,6 @@
     resources # Taskmanager
     bottom # Taskmanager
     btop # Taskmanager
-    appimage-run # Run appimages on nixos
     tree
     rcon-cli
 
@@ -92,7 +93,7 @@
     oculante
     gnome-disk-utility
     popsicle
-    udiskie # Automounting for removable disks
+    # udiskie # Automounting for removable disks
     baobab # Disk Usage
     yt-dlp
     video-downloader
@@ -112,6 +113,7 @@
     unityhub
     vscode
     zed-editor
+    claude-code
 
     # Formatters / LSPs
     alejandra
@@ -167,11 +169,11 @@
     bitwarden-desktop
 
     # Themes
-    pywalfox-native
+    # pywalfox-native
     matugen
     adw-gtk3
     catppuccin
-    pywal
+    # pywal
 
     # Graphic Programs
     gimp3

@@ -3,17 +3,7 @@
   ...
 }:
 {
-  programs.dconf.enable = true;
-  programs.nix-ld.enable = true;
-  programs.ssh.startAgent = false;
-
-  services.dbus.enable = true;
-
-  services.udisks2.enable = true;
-
-  fonts.packages = builtins.filter pkgs.lib.attrsets.isDerivation (
-    builtins.attrValues pkgs.nerd-fonts
-  ); # fonts
+  networking.hostName = "homenix";
 
   environment.variables = {
     GTK_THEME = "adw-gtk3-dark";

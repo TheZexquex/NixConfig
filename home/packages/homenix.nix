@@ -91,7 +91,6 @@
     # Themes
     glib
     nwg-look
-    pywalfox-native
     matugen
     adw-gtk3
     gnome-themes-extra
@@ -103,7 +102,6 @@
     # magnetic-catppuccin-gtk
     waypaper
     wpgtk
-    pywal
     kdePackages.qt6ct
 
     # Graphic Programs

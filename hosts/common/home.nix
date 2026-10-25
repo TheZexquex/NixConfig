@@ -9,7 +9,7 @@
       inherit stable-pkgs;
     };
 
-    # useUserPackages = true;
+    useUserPackages = true;
     useGlobalPkgs = true;
 
     users.thezexquex = {

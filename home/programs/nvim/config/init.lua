@@ -59,4 +59,12 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+require("thezexquex")
+
+require("lazy").setup("plugins", {
+	performance = {
+		rtp = {
+			paths = { vim.g.nix_treesitter_parsers },
+		},
+	},
+})

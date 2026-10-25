@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ../common
-    ./configuration
+    ./configuration.nix
     ./modules
     ./hardware.nix
     ./systempackages.nix

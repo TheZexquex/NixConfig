@@ -3,9 +3,12 @@
     enable = true;
 
     signing = {
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIKnUPf31V72xBN4Qv51t8UjXqWd3we7h7XybvFkVVw3 jakobreiser@gmx.de";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIKnUPf31V72xBN4Qv51t8UjXqWd3we7h7XybvFkVVw3 thezexquex@homenix";
       signByDefault = true;
-      format = "openpgp";
+      format = "ssh";
+      allowedSigners = ''
+        contact@thezexquex.dev namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIKnUPf31V72xBN4Qv51t8UjXqWd3we7h7XybvFkVVw3 thezexquex@homenix
+      '';
     };
 
     lfs = {
@@ -17,12 +20,9 @@
       user.name = "TheZexquex";
 
       init.defaultBranch = "main";
-      # Sign all commits using ssh key
-      commit.gpgsign = true;
-      gpg.format = "ssh";
-      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-      user.signingkey = "~/.ssh/id_ed25519.pub";
+
       core.autocrlf = "input";
+      pull.rebase = true;
     };
   };
 }

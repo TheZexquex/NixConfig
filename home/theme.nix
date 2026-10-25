@@ -19,16 +19,12 @@
       package = pkgs.adw-gtk3;
     };
 
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-
     gtk4.theme = config.gtk.theme;
   };
 
   qt = {
     enable = true;
-    platformTheme = "kde";
+    platformTheme.name = "kde";
     style.name = "breeze";
   };
 }

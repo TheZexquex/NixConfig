@@ -79,7 +79,8 @@ end)
 local mod = "SUPER"
 
 -- Binds
-hl.bind("Print", hl.dsp.exec_cmd("hlshot --freeze --mode region -o ~/Pictures/Screenshots"))
+hl.bind(mod .. " + F12", hl.dsp.exec_cmd("wayscriber --freeze"))
+hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot --freeze --mode region -o ~/Pictures/Screenshots"))
 hl.bind(mod .. " + Print", hl.dsp.exec_cmd("hlshot -m output -m active -o ~/Pictures/Screenshots"))
 hl.bind(mod .. " + V", hl.dsp.exec_cmd("vicinae vicinae://launch/clipboard/history"))
 hl.bind(mod .. " + B", hl.dsp.exec_cmd("firefox"))
