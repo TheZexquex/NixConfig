@@ -1,13 +1,18 @@
 {
   inputs,
   pkgs,
+  lib,
+  osConfig,
   ...
 }: {
   imports = [
     inputs.noctalia.homeModules.default
   ];
 
-  age.secrets.calendar-email.file = ../../secrets/calendar-email.age;
+  # TODO: re-enable on travelnix once calendar-email.age is rekeyed for it
+  age.secrets = lib.mkIf (osConfig.networking.hostName != "travelnix") {
+    calendar-email.file = ../../secrets/calendar-email.age;
+  };
 
   programs.noctalia = let
     padding-global = 6;

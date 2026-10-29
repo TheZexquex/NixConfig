@@ -150,7 +150,7 @@
     mousai
 
     # Minecraft
-    modrinth-app
+    # modrinth-app
     labymod-launcher
 
     # Devtools and Languages

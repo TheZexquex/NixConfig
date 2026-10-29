@@ -110,6 +110,12 @@
           vicinae.nixosModules.default
           home-manager.nixosModules.home-manager
           agenix.nixosModules.default
+
+					{
+            nixpkgs.overlays = [
+							affinity-nix.overlays.default
+            ];
+          }
         ];
       };
 

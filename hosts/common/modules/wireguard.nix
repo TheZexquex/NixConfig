@@ -1,4 +1,4 @@
-{
+{lib, ...}: {
   networking.wg-quick.interfaces = {
     wg0 = {
       address = [
@@ -23,7 +23,7 @@
           presharedKeyFile = "/home/thezexquex/wireguard/preshared.key";
         }
       ];
-      autostart = true;
+      autostart = lib.mkDefault true;
     };
   };
 }
