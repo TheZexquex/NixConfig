@@ -921,11 +921,11 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1793364070,
-        "narHash": "sha256-qeimwtisHX4v4ZkXc4CUB4jamhzZyukDAVLLJzZbCGo=",
+        "lastModified": 1793619730,
+        "narHash": "sha256-oYGsW/rKIh1nndoYuJRbYVEJVjwpYJOEFpZ5s7rHLQw=",
         "owner": "emaspa",
         "repo": "openxlr",
-        "rev": "c369731285b56e4902915631e35cea70fb99cbb5",
+        "rev": "f0252006bbf311a9456bf0bfba7a576aa19bd23d",
         "type": "github"
       },
       "original": {
