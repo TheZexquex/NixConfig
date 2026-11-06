@@ -115,7 +115,6 @@
     gnomeExtensions.clipboard-indicator
     clipse
     dart-sass
-    upower
     gvfs
     bluez
     gzip

@@ -4,7 +4,10 @@
   lib,
   osConfig,
   ...
-}: {
+}:
+let
+ isTravelnix = osConfig.networking.hostName == "travelnix";
+in {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -26,9 +29,9 @@
     settings = {
       bar.order = ["main"];
       bar.main = {
-        enable = true;
+        enabled = true;
         position = "top";
-        audo_hide = false;
+        auto_hide = false;
         background_opacity = 0.95;
 
         thickness = 40;
@@ -45,7 +48,7 @@
         capsule = true;
         capsule_radius = 5;
         capsule_padding = 10;
-        capusle_thickness = 0.5;
+        capsule_thickness = 0.5;
         # capsule_border = "primary";
 
         start = [
@@ -67,29 +70,25 @@
           "sysmon"
           "network"
           "bluetooth"
-          "clock"
-        ];
+        ] ++ lib.optional isTravelnix "battery"
+        ++ ["clock"];
       };
 
       control_center = {
-        scale = 1.3;
-        position = "close_to_bar_button";
         sidebar = "full";
         sidebar_section = "full";
+
+        calendar.show_week_numbers = true;
       };
 
       audio = {
         enable_overdrive = true;
         enable_sounds = true;
-        notification_sound = "${inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/sounds/notification.wav";
-        volume_change_sound = "${inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/sounds/volume-change.wav";
       };
 
       calendar = {
         enabled = true;
         refresh_minutes = 10;
-
-        week_numbers = true;
 
         account = {
           private_google = {
@@ -114,24 +113,20 @@
 
         # Other
         avatar_path = "/home/thezexquex/avatar.png";
+        popup_shadows = false;
 
-        animationDisabled = false;
-        animationSpeed = 0.5;
-        avatarImage = "/home/thezexquex/avatar.png";
-        compactLockScreen = false;
-        dimDesktop = true;
-        enableShadows = false;
-        forceBlackScreenCorners = false;
-        language = "";
-        lockOnSuspend = true;
-        radiusRatio = 0.4;
-        scaleRatio = 1.0;
-        screenRadiusRatio = 1;
-        shadowDirection = "bottom_right";
-        showScreenCorners = false;
+        animation = {
+          enabled = true;
+          speed = 0.5;
+        };
+
+        shadow.direction = "down_right";
+
+        screen_corners.enabled = false;
 
         panel = {
           open_near_click_control_center = true;
+          shadow = false;
         };
 
         screenshot = {
@@ -156,7 +151,7 @@
         };
 
         control-center = {
-          custom_image = "$ security.pam.services.hyprland.enableKwallet = true;{inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/images/distros/nixos.svg";
+          custom_image = "${inputs.noctalia.packages.${pkgs.system}.default}/share/noctalia/assets/images/distros/nixos.svg";
           custom_image_colorize = true;
         };
 
@@ -171,14 +166,8 @@
         };
       };
 
-      hooks = {
-        enabled = false;
-        darkModeChange = "";
-        wallpaperChange = "";
-      };
-
       location = {
-        adress = "Munich, Germany";
+        address = "Munich, Germany";
       };
 
       weather = {
@@ -188,7 +177,11 @@
         effects = true;
       };
 
-      notifications = {
+      lockscreen = {
+        lock_before_suspend = true;
+      };
+
+      notification = {
         enable_daemon = true;
         show_app_name = true;
         show_actions = true;
@@ -224,7 +217,7 @@
 
         templates = {
           enable_builtin_templates = true;
-          buildin_ids = [];
+          builtin_ids = [];
         };
       };
 
