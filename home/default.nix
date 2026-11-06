@@ -9,7 +9,7 @@
     [
       ./programs
       ./scripts
-      ./hyprland.nix
+      ./hyprland
       #./niri.nix
       ./theme.nix
       ./gc.nix
