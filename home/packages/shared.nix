@@ -17,6 +17,7 @@
     kdePackages.dolphin-plugins
     kdePackages.ark
     kdePackages.breeze-gtk
+		kdePackages.kde-cli-tools
     krename
     filezilla
 
