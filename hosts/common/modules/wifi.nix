@@ -7,4 +7,6 @@
       "127.0.0.1" = ["outline.localhost"];
     };
   };
+
+	programs.nm-applet.enable = true;
 }
