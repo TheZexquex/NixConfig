@@ -72,7 +72,7 @@ hl.bind(mod .. " + Print", hl.dsp.exec_cmd("hlshot -m output -m active -o ~/Pict
 hl.bind(mod .. " + V", hl.dsp.exec_cmd("vicinae vicinae://launch/clipboard/history"))
 hl.bind(mod .. " + B", hl.dsp.exec_cmd("firefox"))
 hl.bind(mod .. " + Q", hl.dsp.exec_cmd("alacritty"))
-hl.bind(mod .. " + ALT + END", hl.dsp.exit())
+hl.bind(mod .. " + SHIFT + L", hl.dsp.exit())
 hl.bind(mod .. " + L", hl.dsp.exec_cmd("noctalia msg session lock"))
 hl.bind(mod .. " + C", hl.dsp.window.close({}))
 hl.bind(mod .. " + F", hl.dsp.window.fullscreen({ action = "toggle", mode = "fullscreen" }))
