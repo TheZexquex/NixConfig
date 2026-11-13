@@ -132,7 +132,7 @@
     ntfs3g
     android-tools
 
-    # ungoogled-chromium
+    ungoogled-chromium
 
     # Streaming
     chatterino7
