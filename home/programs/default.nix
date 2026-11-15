@@ -13,6 +13,7 @@
     ./nvim
     ./firefox.nix
     ./vicinae.nix
+    ./sefirah.nix
     #    ./ssh.nix
   ];
 }
